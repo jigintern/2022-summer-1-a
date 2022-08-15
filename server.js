@@ -12,7 +12,7 @@ serve(async (req) => {
     tips.push("お役立ち情報！！！！1");
     tips.push("お役立ち情報！！！！2");
     tips.push("お役立ち情報！！！！3");
-    console.log(tips[Math.floor(Math.random() * firstWord.length)]);
+    
     return new Response(tips[Math.floor(Math.random() * firstWord.length)]);
 
   }
