@@ -9,8 +9,6 @@ serve(async (req) => {
     return new Response("jigインターンへようこそ！");
   }
 
-  console.log('test');
-
   return serveDir(req, {
     fsRoot: "public",
     urlRoot: "",
