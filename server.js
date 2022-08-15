@@ -8,11 +8,11 @@ serve(async (req) => {
 
   if (req.method === "GET" && pathname === "/tips") {
     
-    let tips = [];
-    tips.push("お役立ち情報！！！！1");
+    let tips = ["お役立ち情報！！！！1"];
     tips.push("お役立ち情報！！！！2");
     tips.push("お役立ち情報！！！！3");
-    
+    tips.push("お役立ち情報！！！！4");
+
     return new Response(tips[Math.floor(Math.random() * firstWord.length)]);
 
   }
