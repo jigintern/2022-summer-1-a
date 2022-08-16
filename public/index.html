@@ -3,25 +3,26 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text" />
   <button id="search">検索</button>
   <div>
-    <button id="home">ホーム</button>
-    <button id="wear">コーディネート</button>
+    <button id=home>ホーム</button>
+    <button id=wear>コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
-    <button id="map">クールマップ</button>
+    <button id=map>クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
-    
+
     <p>
       <button id="wbgt">暑さ指数は？</button><br>
       ここに暑さ指数とかだす?
-      <div id="wbgt_val"></div>
+    <div id="wbgt_val"></div>
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
+
     <p>
       <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
       <a href="https://tenki.jp/">tenki.jp/ </a>
@@ -29,17 +30,21 @@
 
     <script type="module">
       window.onload = async (event) => {
-        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-        alert(response);//お役立ち情報を表示
+        const tips = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
+        alert(tips);//お役立ち情報を表示
       };
 
       document.querySelector("#wear").onclick = async (event) => {
         location.href = 'coordination.html';//コーディネートのページに移動
       }
 
-      documet.querySelector("wbgt").onclick = async (event) => {
+      document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
+        location.href = 'map.html';//マップのページに移動
+      }
+
+      documet.querySelector("#wbgt").onclick = async (event) => {
         //位置情報を取得
-        navigator.geolocation.getCurrentPosition(success, error);
+        /*navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
         function success(position) {
@@ -48,8 +53,8 @@
 
           //josoデータを作成
           var json_data = {
-            'let' : let,
-            'lon' : lon
+            'let': let,
+            'lon': lon
           };
 
           //位置情報をPOSTでサーバーに送信
@@ -67,7 +72,7 @@
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
-        }
+        }*/
       }
     </script>
 
