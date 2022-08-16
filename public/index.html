@@ -24,7 +24,12 @@
 
     <script type="module">
       window.onload = async (event) => {
-      /*  //位置情報を取得
+
+
+        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
+        alert(response);//お役立ち情報を表示
+        document.querySelector("#welcomeMessage").innerText = await response.text();
+            //位置情報を取得
         navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
@@ -48,15 +53,15 @@
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
-        }*/
-
-        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-        alert(response);//お役立ち情報を表示
-        document.querySelector("#welcomeMessage").innerText = await response.text();
+        }
       };
       document.querySelector("#wear").onclick = async (event) => {
         location.href = 'coordination.html';//コーディネートのページに移動
       }
+      document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
+      location.href = 'map.html';//マップのページに移動
+    }
+      
     </script>
 
     <style>
