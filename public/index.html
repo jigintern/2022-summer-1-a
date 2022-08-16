@@ -25,9 +25,15 @@
       alert(response);//お役立ち情報を表示
       document.querySelector("#welcomeMessage").innerText = await response.text();
     };
-    document.querySelector("#wear").onclick = async (event) => {
+
+    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
       location.href = 'coordination.html';//コーディネートのページに移動
     }
+
+    document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
+      location.href = 'map.html';//マップのページに移動
+    }
+
   </script>
 
 <style>
