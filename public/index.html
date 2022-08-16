@@ -25,7 +25,6 @@
     <script type="module">
       window.onload = async (event) => {
 
-
         const tips = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
         alert(tips);//お役立ち情報を表示
         document.querySelector("#welcomeMessage").innerText = await tips.text();
@@ -39,7 +38,7 @@
           var geo_text = String(lat) + ',' + String(lng); //文字列に変換("let","lng")
 
           //位置情報をGETでサーバーに送信
-          const response = await fetch("/position", {
+/*          const response = await fetch("/position", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ geo_text })
@@ -48,7 +47,7 @@
           const wbgt = await response.text(); //暑さ指数をサーバー側から取得
           const para = document.querySelector("#wbgt");
           para.innerText = `暑さ指数：${wbgt}`;
-        }
+        */        }
 
         //位置情報の取得に失敗したら
         function error() {
