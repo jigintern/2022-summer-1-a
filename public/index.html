@@ -19,13 +19,13 @@
     <p>
       <button id="wbgt">暑さ指数は？</button><br>
       ここに暑さ指数とかだす?
-      <div id="wbgt_val"></div>
+    <div id="wbgt_val"></div 
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
     <p>
-    <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-    <a href="https://tenki.jp/">tenki.jp/ </a>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      <a href="https://tenki.jp/">tenki.jp/ </a>
     </p>
 
     <script type="module">
@@ -44,7 +44,7 @@
 
       documet.querySelector("#wbgt").onclick = async (event) => {
         //位置情報を取得
-        navigator.geolocation.getCurrentPosition(success, error);
+        /*navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
         function success(position) {
@@ -72,7 +72,7 @@
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
-        }
+        }*/
       }
     </script>
 
