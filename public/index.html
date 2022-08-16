@@ -26,9 +26,9 @@
       window.onload = async (event) => {
 
 
-        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-        alert(response);//お役立ち情報を表示
-        document.querySelector("#welcomeMessage").innerText = await response.text();
+        const tips = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
+        alert(tips);//お役立ち情報を表示
+        document.querySelector("#welcomeMessage").innerText = await tips.text();
             //位置情報を取得
         navigator.geolocation.getCurrentPosition(success, error);
 
