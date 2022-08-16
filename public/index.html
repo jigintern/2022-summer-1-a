@@ -24,7 +24,7 @@
 
     <script type="module">
       window.onload = async (event) => {
-        //位置情報を取得
+      /*  //位置情報を取得
         navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
@@ -48,7 +48,7 @@
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
-        }
+        }*/
 
         const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
         alert(response);//お役立ち情報を表示
