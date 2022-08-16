@@ -85,7 +85,7 @@ serve(async (req) => {
       let wbgt_val = data[max_key]/10;
       let people_val = wbgt_people[pre_id][String(wbgt_val)];
       console.log(wbgt_val, people_val);
-      return new Response(String(wbgt_val)+String(people_val));
+      return new Response(String(wbgt_val)+","+String(people_val));
     };
     const url_wbgt = 'https://www.wbgt.env.go.jp/prev15WG/dl/yohou_' + id + '.csv';
     callApi_wbgt(url_wbgt);
