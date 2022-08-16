@@ -9,25 +9,23 @@
 
   <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text"/>
   <button id="search">検索</button>
-<div><button id = home>ホーム</button>
+<button id = home>ホーム</button>
 <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
 <button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
 
 <p>ここに暑さ指数とかだす?</p><!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
-<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症情報サイト</a>
 <a href="https://tenki.jp/">tenki.jp/ </a>
   <h1 id="welcomeMessage"></h1>
 
   <script type="module">
     window.onload = async (event) => {
-      const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-      alert(response);//お役立ち情報を表示
+      const response = await (await fetch("/api/nanka")).text();//サーバーからtipsをもらってくる
+      alert(await tips.text());//お役立ち情報を表示
       document.querySelector("#welcomeMessage").innerText = await response.text();
+      
     };
-    document.querySelector("#wear").onclick = async (event) => {
-      location.href = 'coordination.html';//コーディネートのページに移動
-    }
   </script>
 
 <style>
