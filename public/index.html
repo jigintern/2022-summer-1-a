@@ -26,6 +26,10 @@
       document.querySelector("#welcomeMessage").innerText = await response.text();
     };
 
+    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+      location.href = 'index.html';//homeのページに移動
+    }
+    
     document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
       location.href = 'coordination.html';//コーディネートのページに移動
     }
