@@ -9,53 +9,65 @@
 
   <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text" />
   <button id="search">検索</button>
-  <div><button id=home>ホーム</button>
-    <button id=wear>コーディネート</button>
+  <div>
+    <button id="home">ホーム</button>
+    <button id="wear">コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
-    <button id=map>クールマップ</button>
+    <button id="map">クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
-
-    <p>ここに暑さ指数とかだす?</p>
+    
+    <p>
+      <button id="wbgt">暑さ指数は？</button><br>
+      ここに暑さ指数とかだす?
+      <div id="wbgt_val"></div>
+    </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
-
-    <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-    <a href="https://tenki.jp/">tenki.jp/ </a>
-    <h1 id="welcomeMessage"></h1>
+    <p>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      <a href="https://tenki.jp/">tenki.jp/ </a>
+    </p>
 
     <script type="module">
       window.onload = async (event) => {
+        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
+        alert(response);//お役立ち情報を表示
+      };
+
+      document.querySelector("#wear").onclick = async (event) => {
+        location.href = 'coordination.html';//コーディネートのページに移動
+      }
+
+      documet.querySelector("wbgt").onclick = async (event) => {
         //位置情報を取得
         navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
         function success(position) {
           var lat = position.coords.latitude; //緯度
-          var lng = position.coords.longitude; //経度
-          var geo_text = String(lat) + ',' + String(lng); //文字列に変換("let","lng")
+          var lon = position.coords.longitude; //経度
 
-          //位置情報をGETでサーバーに送信
-          const response = await fetch("/position", {
-            method: "GET",
+          //josoデータを作成
+          var json_data = {
+            'let' : let,
+            'lon' : lon
+          };
+
+          //位置情報をPOSTでサーバーに送信
+          const response = await fetch("/loc", {
+            method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ geo_text })
+            body: JSON.stringify(json_data)
           });
 
           const wbgt = await response.text(); //暑さ指数をサーバー側から取得
-          const para = document.querySelector("#wbgt");
-          para.innerText = `暑さ指数：${wbgt}`;
+          const para = document.querySelector("#wbgt_val");
+          para.innerText = `${wbgt_val}`;
         }
 
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
         }
-
-        const response = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-        alert(response);//お役立ち情報を表示
-        document.querySelector("#welcomeMessage").innerText = await response.text();
-      };
-      document.querySelector("#wear").onclick = async (event) => {
-        location.href = 'coordination.html';//コーディネートのページに移動
       }
     </script>
 
@@ -64,7 +76,7 @@
         color: red
       }
     </style>
-
+  </div>
 </body>
 
 </html>
