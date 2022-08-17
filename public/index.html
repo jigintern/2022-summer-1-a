@@ -27,10 +27,10 @@
     <p>
       <div id="heatstroke"></div>
     </p>
-    <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
-
+    
     <p>
-      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      役に立つサイト↓<br>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><br>
       <a href="https://tenki.jp/">tenki.jp/ </a>
     </p>
 
@@ -56,12 +56,6 @@
         async function success(position) {
           var lat = position.coords.latitude; //緯度
           var lon = position.coords.longitude; //経度
-
-          //jsonデータを作成
-          /*var json_data = {
-            'lat' : lat,
-            'lon' : lon
-          };*/
 
           //位置情報をPOSTでサーバーに送信
           const response = await fetch("/loc", {
