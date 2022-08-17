@@ -1,14 +1,18 @@
 @charset "utf-8";
 
+div {
+  text-align: center;
+}
+
 .click {
   color: white;
   width: 200px;
   padding: 10px;
-  margin: auto 2px;
+  margin: auto 10px;
   font-size: 20px;
   border-radius: 30px;
-  text-align: center;
   border: none;
+  justify-content: space-between;
 }
 
 #home {
@@ -17,6 +21,7 @@
 
 #wear {
   background-color: red;
+  
 }
 
 #map{
@@ -34,4 +39,6 @@
 h1 {
   color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
   background:aqua;
+  text-align: center;
 }
+
