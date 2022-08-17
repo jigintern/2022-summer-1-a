@@ -4,7 +4,7 @@
   color: white;
   width: 200px;
   padding: 10px;
-  margin: auto 30px;
+  margin: auto 2px;
   font-size: 20px;
   border-radius: 30px;
   text-align: center;
@@ -29,4 +29,9 @@
   padding: 10px;
   text-align: center;
   border-radius: 40px;
+}
+
+h1 {
+  color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
+  background:aqua;
 }

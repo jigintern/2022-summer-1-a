@@ -19,7 +19,9 @@
       <button id="wbgt">現在地の暑さ指数は？</button><br>
     <div id="wbgt_val"></div> 
     </p>
-      <nobr id="wbgt_message"></nobr>
+    
+    <nobr id="wbgt_message"></nobr>
+
     <p>
       <div id="heatstroke"></div>
     </p>
@@ -93,7 +95,6 @@
             document.getElementById("wbgt_val").style.fontSize = "30px" ;
             document.getElementById("wbgt_val").style.color = "orange" ;
             message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
-
           }
 
           para.innerText = "あなたのまわりの暑さ指数: "+`${wbgt}`; 
@@ -111,10 +112,6 @@
         }
       }
     </script>
-
-    <!--<style>
-
-    </style>-->
   </div>
 </body>
 
