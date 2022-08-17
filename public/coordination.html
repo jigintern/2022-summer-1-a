@@ -27,17 +27,8 @@
     <form method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file">
       <img id="file-preview" width="400">
-<<<<<<< Updated upstream
-    </form>
-      <div>コメント</div>
-      <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
-      <div><button id="tweet">投稿</button></div>
-      <img id="file-show" width="400"><div>
-      <div><button id="back">前の投稿</button></div>
-      <div><button id="next">次の投稿</button></div>
-      <div><button id="delete">現在の投稿を削除</button></div>
 
-=======
+
     <div>コメント</div>
     <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
     <div><button id="tweet">投稿</button></div>
@@ -48,7 +39,7 @@
     <div><button id="next">次の投稿</button></div>
     <div><button id="delete">現在の投稿を削除</button></div>
       
->>>>>>> Stashed changes
+
 
       <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
       <!--参考元-->
@@ -80,7 +71,7 @@
         document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
           location.href = 'index.html';//homeのページに移動
         }
-        
+
         function reload(title, comment, photo_data){
           //タイトル
           let para = document.getElementById("#title");
