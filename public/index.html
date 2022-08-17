@@ -51,7 +51,7 @@
           var lat = position.coords.latitude; //緯度
           var lon = position.coords.longitude; //経度
 
-          //josoデータを作成
+          //jsonデータを作成
           /*var json_data = {
             'lat' : lat,
             'lon' : lon
@@ -61,12 +61,25 @@
           const response = await fetch("/loc", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(lat, lon)
+            body: JSON.stringify({lat, lon})
           });
 
-          const wbgt = await response.text(); //暑さ指数をサーバー側から取得
+          const values = await response.text(); //暑さ指数をサーバー側から取得
+          const wbgt = values.split(',')[0];
+          const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
-          para.innerText = `${wbgt_val}`;
+         /* //暑さ指数に応じて色とかフォントサイズを変えたい
+          if(Number(wbgt) <= 31){ 
+            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
+            documents.getElementById("#wbgt_val").style.color = "red" ;
+          }else if(Number(wbgt) <= 28){
+            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
+            documents.getElementById("#wbgt_val").style.color = "orangered" ;
+          }else if(Number(wbgt) <= 25){
+            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
+            documents.getElementById("#wbgt_val").style.color = "yellow" ;
+          }//壊したらごめんなさい byこうへい */
+          para.innerText = `${wbgt}`; 
         }
 
         //位置情報の取得に失敗したら
@@ -79,6 +92,7 @@
     <style>
       h1 {
         color: red
+        
       }
     </style>
   </div>
