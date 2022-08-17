@@ -33,11 +33,12 @@
     <div>コメント</div>
     <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
     <div><button id="tweet">投稿</button></div>
+
     <p id = "title"></p>
     <p id = "comment"></p>
-
     <img id="file-show" width="400"><div>
-    <div><button id="back">前の投稿</button></div>
+    
+      <div><button id="back">前の投稿</button></div>
     <div><button id="next">次の投稿</button></div>
     <div><button id="delete">現在の投稿を削除</button></div>
       
@@ -179,7 +180,6 @@
           let comment = data[1];
           let photo_data = data[2];
 
-
             //タイトルを表示
           let para = document.querySelector("#title");
 
@@ -215,7 +215,6 @@
           let title = data[0];
           let comment = data[1];
           let photo_data = data[2];
-
 
 
            //タイトルを表示
