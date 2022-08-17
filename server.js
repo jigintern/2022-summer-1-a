@@ -12,6 +12,8 @@ let url = 'https://akeajtagrjjhododqhpi.supabase.co';
 let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWFqdGFncmpqaG9kb2RxaHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA2NTA2MjIsImV4cCI6MTk3NjIyNjYyMn0.QyhEX0CaRWChJpqsfvogNWmGGYB-yNJt7XcKbE825yQ';
 const supabase = createClient(url, anon_key);
 let obj; // Jsonobj, select(),insert()で使用
+let lat;
+let lon;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -41,8 +43,8 @@ serve(async (req) => {
   // 暑さ指数予測取得
   if (req.method === "POST" && pathname === "/loc") { // POSTメソッド，cieパス
     const requestJson = await req.json();
-    const lat = requestJson.lat; // 緯度
-    const lon = requestJson.lon; // 経度
+    lat = requestJson.lat; // 緯度
+    lon = requestJson.lon; // 経度
     // 最近座標の観測所idを特定
     const keys = Object.keys(id_lat_lon_jsonData);
     let tmp_dis = 1000.0;
@@ -99,7 +101,7 @@ serve(async (req) => {
     // データ取得までsleep
     while (String(wbgt_val)=="undefined" || String(people_val)=="undefined") {
       const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await _sleep(50);
+      await _sleep(500);
     }
 
     return new Response(String(wbgt_val) + ',' + String(people_val));
@@ -153,7 +155,58 @@ serve(async (req) => {
   };
 
 
+  // mapのために店舗情報を返す（緯度と経度を最初に受け取る）
+  if (req.method === "POST" && pathname === "/search_shop") {
+    const requestJson = await req.json();
+    lat = requestJson.lat; // 緯度
+    lon = requestJson.lon; // 経度
+    //lat = 35;
+    //lon = 135;
+    let dist = 1; //km
 
+    let shop_info;
+    async function callApi_overpass(url_overpass) {
+      /*await fetch(url_overpass)
+        .then(response => response.json())
+        .then(d => {
+          shop_info = d;
+        });*/
+      await fetch(url_overpass)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(jsonData){
+          // JSONデータを扱った処理など
+          shop_info = jsonData;
+        });
+    };
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
+    callApi_overpass(url_overpass);
+
+    // データ取得までsleep
+    while (String(shop_info)=="undefined") {
+      const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await _sleep(50);
+    }
+
+    let elements = shop_info.elements;
+    let shop_lat = "", shop_lon = "", shop_name = "";
+    let sp_key = "@@@"
+    for (let i in elements) {
+      if (i==elements.length-1){sp_key = ""}
+      shop_lat += String(elements[i].lat) + sp_key;
+      shop_lon += String(elements[i].lon) + sp_key;
+      if (String(elements[i].tags.branch) != 'undefined') {
+        shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
+      } else {
+        shop_name += elements[i].tags.name + sp_key;
+      }
+    }
+    // return_text : 属性\n区切り，項目@@@区切り
+    let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
+    console.log(return_text);
+    return new Response(return_text);
+  };
 
 
   return serveDir(req, {
