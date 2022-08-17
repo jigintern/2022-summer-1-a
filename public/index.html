@@ -10,15 +10,14 @@
   <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text" />
   <button id="search">検索</button>
   <div>
-    <button id=home>ホーム</button>
-    <button id=wear>コーディネート</button>
+    <button class="click" id="home">ホーム</button>
+    <button class="click" id="wear">コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
-    <button id=map>クールマップ</button>
+    <button class="click" id="map">クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
 
     <p>
-      <button id="wbgt">暑さ指数は？</button><br>
-      ここに暑さ指数とかだす?
+      <button id="wbgt">現在地の暑さ指数は？</button><br>
     <div id="wbgt_val"></div> 
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
@@ -69,6 +68,7 @@
           const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
          /* //暑さ指数に応じて色とかフォントサイズを変えたい
+
           if(Number(wbgt) <= 31){ 
             documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
             documents.getElementById("#wbgt_val").style.color = "red" ;
@@ -78,7 +78,9 @@
           }else if(Number(wbgt) <= 25){
             documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
             documents.getElementById("#wbgt_val").style.color = "yellow" ;
+
           }//壊したらごめんなさい byこうへい */
+
           para.innerText = `${wbgt}`; 
         }
 
