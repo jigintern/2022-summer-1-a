@@ -20,6 +20,7 @@
       <button id="wbgt">現在地の暑さ指数は？</button><br>
     <div id="wbgt_val"></div> 
     </p>
+    <div id="wbgt_message"><!--コメント出さないか by光平-->
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
     <p>
@@ -67,11 +68,14 @@
           const wbgt = values.split(',')[0];
           const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
+          const message = document.querySelector("#wbgt_message");//メッセージの変数
           //暑さ指数に応じて色とかフォントサイズを変えたい
 
           if(Number(wbgt) >= 31){ 
             document.getElementById("wbgt_val").style.fontSize = "50px" ;
             document.getElementById("wbgt_val").style.color = "red" ;
+            document.getElementById("wbgt_message").style.color = "red" ;
+            message.innerText = "非常に危険なので外や運動は避けましょう!"
           }else if(Number(wbgt) >= 28){
             document.getElementById("wbgt_val").style.fontSize = "40px" ;
             document.getElementById("wbgt_val").style.color = "orangered" ;
