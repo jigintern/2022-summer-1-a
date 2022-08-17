@@ -35,154 +35,153 @@
     <div><button id="delete">現在の投稿を削除</button></div>
       
 
-    <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-    <!--参考元-->
-    <a href="https://tenki.jp/">tenki.jp/ </a>
-    <h1 id="welcomeMessage"></h1>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      <!--参考元-->
+      <a href="https://tenki.jp/">tenki.jp/ </a>
+      <h1 id="welcomeMessage"></h1>
 
-    <script type="module">
-      window.onload = async (event) => {
+      <script type="module">
+        window.onload = async (event) => {
 
-      };
-
-
-      document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-        location.href = 'index.html';//homeのページに移動
-      }
-
-      document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
-        location.href = 'map.html';//マップのページに移動
-      }
-      document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
-        location.href = 'coordinationupload.html';
-      }
+        };
 
 
+        document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+          location.href = 'index.html';//homeのページに移動
+        }
 
-      let photo_data = "";
-      // 画像の読み込み,文字コードに変換
-      document.getElementById('file-sample').addEventListener('change', function (e) {
-        // 1枚だけ表示する
-          var file = e.target.files[0];
-          // ファイルリーダー作成
-          var fileReader = new FileReader();
-          fileReader.onload = function() {
-              // Data URIを取得
-              photo_data = this.result; // base64文字列
-              // img要素に表示
-              var img = document.getElementById('file-preview');
-              img.src = photo_data;
+        document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
+          location.href = 'map.html';//マップのページに移動
+        }
+        document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
+          location.href = 'coordinationupload.html';
+        }
+
+
+        function reload(title, comment, photo_data){
+          // 写真を表示
+          var img = document.getElementById('file-show');
+          img.src = photo_data;
+        }
+
+        let photo_data = "";
+        // 画像の読み込み,文字コードに変換
+        document.getElementById('file-sample').addEventListener('change', function (e) {
+            // 1枚だけ表示する
+            var file = e.target.files[0];
+            // ファイルリーダー作成
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                // Data URIを取得
+                photo_data = this.result; // base64文字列
+                // img要素に表示
+                var img = document.getElementById('file-preview');
+                img.src = photo_data;
+            }
+            // ファイルをData URIとして読み込む
+            fileReader.readAsDataURL(file);
+        });
+
+        let id = 0;
+        // 投稿ボタン
+        document.querySelector("#tweet").onclick = async (event) => {
+          let title = document.querySelector("#title").value;
+          let comment = document.querySelector("#comment").value;
+          const response = await fetch("/code_info", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, comment, photo_data })
+          });
+          let result = await response.text();
+        };
+
+        // showボタンでデータベースの指定したidのtitle,comment,photo_dataを取得
+        document.querySelector("#next").onclick = async (event) => {
+          const response_id = await fetch("/code_info");
+          let max_id = await response_id.text();
+          max_id = Number(max_id); // 1~idまでが時系列
+          if (id==max_id){
+            id=0;
+          }else{
+            id++;
           }
-          // ファイルをData URIとして読み込む
-          fileReader.readAsDataURL(file);
-      });
 
-      let id = 0;
-      // 投稿ボタン
-      document.querySelector("#tweet").onclick = async (event) => {
-        let title = document.querySelector("#title").value;
-        let comment = document.querySelector("#comment").value;
-        const response = await fetch("/code_info", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, comment, photo_data })
-        });
-        let result = await response.text();
-      };
+          // idの投稿情報を取得
+          const response = await fetch("/code_info2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+          });
+          let result = await response.text();
+          let data = result.split('@');
+          let title = data[0];
+          let comment = data[1];
+          let photo_data = data[2];
 
-      // showボタンでデータベースの指定したidのtitle,comment,photo_dataを取得
-      document.querySelector("#next").onclick = async (event) => {
-        const response_id = await fetch("/code_info");
-        let max_id = await response_id.text();
-        max_id = Number(max_id); // 1~idまでが時系列
-        if (id==max_id){
-          id=0;
-        }else{
-          id++;
+          reload(title, comment, photo_data);
+        };
+
+        document.querySelector("#back").onclick = async (event) => {
+          const response_id = await fetch("/code_info");
+          let max_id = await response_id.text();
+          max_id = Number(max_id); // 1~idまでが時系列
+          if (id==0){
+            id=max_id;
+          }else{
+            id--;
+          }
+
+          // idの投稿情報を取得
+          const response = await fetch("/code_info2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+          });
+          let result = await response.text();
+          let data = result.split('@');
+          let title = data[0];
+          let comment = data[1];
+          let photo_data = data[2];
+
+          reload(title, comment, photo_data);
+        };
+
+        document.querySelector("#delete").onclick = async (event) => {
+          // idの投稿情報を取得
+          const response = await fetch("/code_info_del", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+          });
+          let next_id = await response.text();
+          id = Number(next_id);
+
+          // idの投稿情報を取得
+          const response2 = await fetch("/code_info2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+          });
+          let result = await response2.text();
+          let data = result.split('@');
+          let title = data[0];
+          let comment = data[1];
+          let photo_data = data[2];
+
+          reload(title, comment, photo_data);
+        };
+
+      </script>
+
+      <style>
+        h1 {
+          color: red
         }
 
-        // idの投稿情報を取得
-        const response = await fetch("/code_info2", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id })
-        });
-        let result = await response.text();
-        let data = result.split('@');
-        let title = data[0];
-        let comment = data[1];
-        let photo_data = data[2];
-
-        // 写真を表示
-        var img = document.getElementById('file-show');
-        img.src = photo_data;
-      };
-
-      document.querySelector("#back").onclick = async (event) => {
-        const response_id = await fetch("/code_info");
-        let max_id = await response_id.text();
-        max_id = Number(max_id); // 1~idまでが時系列
-        if (id==0){
-          id=max_id;
-        }else{
-          id--;
+        h2 {
+          color: plum
         }
-
-        // idの投稿情報を取得
-        const response = await fetch("/code_info2", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id })
-        });
-        let result = await response.text();
-        let data = result.split('@');
-        let title = data[0];
-        let comment = data[1];
-        let photo_data = data[2];
-
-        // 写真を表示
-        var img = document.getElementById('file-show');
-        img.src = photo_data;
-      };
-
-      document.querySelector("#delete").onclick = async (event) => {
-        // idの投稿情報を取得
-        const response = await fetch("/code_info_del", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id })
-        });
-        let next_id = await response.text();
-        id = Number(next_id);
-
-        // idの投稿情報を取得
-        const response2 = await fetch("/code_info2", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id })
-        });
-        let result = await response2.text();
-        let data = result.split('@');
-        let title = data[0];
-        let comment = data[1];
-        let photo_data = data[2];
-
-        // 写真を表示
-        var img = document.getElementById('file-show');
-        img.src = photo_data;
-      };
-
-    </script>
-
-    <style>
-      h1 {
-        color: red
-      }
-
-      h2 {
-        color: plum
-      }
-    </style>
+      </style>
   </div>
 </body>
 
