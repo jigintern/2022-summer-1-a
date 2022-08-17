@@ -91,8 +91,10 @@ serve(async (req) => {
     const url_wbgt = 'https://www.wbgt.env.go.jp/prev15WG/dl/yohou_' + id + '.csv';
     callApi_wbgt(url_wbgt);
 
-    const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await _sleep(1000);
+    while (String(wbgt_val)=="undefined" || String(people_val)=="undefined") {
+      const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await _sleep(50);
+    }
 
     return new Response(String(wbgt_val)+','+String(people_val));
   }
