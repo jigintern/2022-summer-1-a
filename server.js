@@ -1,16 +1,21 @@
 import { serve } from "https://deno.land/std@0.151.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.151.0/http/file_server.ts";
 import { CSV } from "https://js.sabae.cc/CSV.js";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@1.34.0'
+
 import id_lat_lon_jsonData from "./public/id_lat_lon.json" assert { type: "json" };
 import wbgt_people from "./public/wbgt_people.json" assert { type: "json" };
 
 
 let pre_ids = [[11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [31], [33], [34], [32], [35], [36], [40], [41], [42], [43], [45], [44], [46], [54], [55], [56], [57], [49], [48], [52], [50], [51], [53], [60], [61], [62], [63], [64], [65], [69], [68], [66], [67], [81], [71], [72], [73], [74], [82], [85], [84], [86], [83], [87], [88], [91, 92, 93, 94]];
+let url = 'https://akeajtagrjjhododqhpi.supabase.co';
+let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWFqdGFncmpqaG9kb2RxaHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA2NTA2MjIsImV4cCI6MTk3NjIyNjYyMn0.QyhEX0CaRWChJpqsfvogNWmGGYB-yNJt7XcKbE825yQ';
+const supabase = createClient(url, anon_key);
+let obj; // Jsonobj, select(),insert()で使用
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
-  console.log(req.method);
 
   if (req.method === "GET" && pathname === "/tips") {
     
@@ -91,14 +96,73 @@ serve(async (req) => {
     const url_wbgt = 'https://www.wbgt.env.go.jp/prev15WG/dl/yohou_' + id + '.csv';
     callApi_wbgt(url_wbgt);
 
+    // データ取得までsleep
     while (String(wbgt_val)=="undefined" || String(people_val)=="undefined") {
       const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
       await _sleep(50);
     }
 
-    return new Response(String(wbgt_val)+','+String(people_val));
+    return new Response(String(wbgt_val) + ',' + String(people_val));
   }
 
+  // コーディネートの投稿
+  if (req.method === "POST" && pathname === "/code_info") {
+    const requestJson = await req.json();
+    obj = await supabase.from('items').insert(requestJson); // itemsへデータ挿入
+    if (obj.error == null) {
+      return new Response("finished");
+    } else {
+      return new Response(obj.error.message);
+    }
+  }
+
+  // コーディネートの呼び出し（タイトル，コメント，画像データを返す）
+  if (req.method === "POST" && pathname === "/code_info2") {
+    const requestJson = await req.json();
+    let id = Number(requestJson.id);
+    console.log(id);
+    obj = await supabase.from('items').select();
+    if (obj.error == null) {
+      let title = obj.data[id].title;
+      let comment = obj.data[id].comment;
+      let photo_data = obj.data[id].photo_data;
+      return new Response(title + '@' + comment + '@' + photo_data);
+
+      /*
+      for (let i in obj.data) {
+        if (obj.data[i].id == id) {
+          let title = obj.data[i].title;
+          let comment = obj.data[i].comment;
+          let photo_data = obj.data[i].photo_data;
+          return new Response(title + '@' + comment + '@' + photo_data);
+        }
+      }*/
+
+    } else {
+      return new Response(obj.error.message);
+    }
+  }
+
+  // 現在の投稿数を確認
+  if (req.method === "GET" && pathname === "/code_info") {
+    let obj = await supabase.from('items').select();
+    if (obj.error == null) {
+      let max_id = obj.data.length-1;
+      return new Response(max_id);
+    }
+  };
+
+  // 投稿を削除
+  if (req.method === "POST" && pathname === "/code_info_del") {
+    const requestJson = await req.json();
+    let id_del = Number(requestJson.id);
+    obj = await supabase.from('items').select();
+    if (obj.error == null) {
+      let id = obj.data[id_del].id;
+      obj = await supabase.from('items').delete().match({ id });
+      return new Response(id_del-1);
+    }
+  };
 
   return serveDir(req, {
     fsRoot: "public",
