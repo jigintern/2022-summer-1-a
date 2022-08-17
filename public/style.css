@@ -33,8 +33,5 @@
 
 h1 {
   color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
-  /*background:aqua;*/
-}
-body{
-  background-color: #b7babe;
+  background:aqua;
 }
