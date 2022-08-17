@@ -41,7 +41,7 @@
         location.href = 'map.html';//マップのページに移動
       }
 
-      document.querySelector("wbgt").onclick = async (event) => {
+      document.querySelector("#wbgt").onclick = async (event) => {
         //位置情報を取得
         navigator.geolocation.getCurrentPosition(success, error);
 
@@ -70,14 +70,14 @@
           //暑さ指数に応じて色とかフォントサイズを変えたい
 
           if(Number(wbgt) <= 31){ 
-            document.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            document.getElementById("#wbgt_val").style.color = "red" ;
+            document.getElementById("wbgt_val").style.fontSize = "20px" ;
+            document.getElementById("wbgt_val").style.color = "red" ;
           }else if(Number(wbgt) <= 28){
-            document.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            document.getElementById("#wbgt_val").style.color = "orangered" ;
+            document.getElementById("wbgt_val").style.fontSize = "20px" ;
+            document.getElementById("wbgt_val").style.color = "orangered" ;
           }else if(Number(wbgt) <= 25){
-            document.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            document.getElementById("#wbgt_val").style.color = "yellow" ;
+            document.getElementById("wbgt_val").style.fontSize = "20px" ;
+            document.getElementById("wbgt_val").style.color = "yellow" ;
 
           }//壊したらごめんなさい byこうへい */
 
