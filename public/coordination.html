@@ -58,6 +58,11 @@
         }
 
 
+        function reload(title, comment, photo_data){
+          // 写真を表示
+          var img = document.getElementById('file-show');
+          img.src = photo_data;
+        }
 
         let photo_data = "";
         // 画像の読み込み,文字コードに変換
@@ -113,9 +118,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
+          reload(title, comment, photo_data);
         };
 
         document.querySelector("#back").onclick = async (event) => {
@@ -140,9 +143,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
+          reload(title, comment, photo_data);
         };
 
         document.querySelector("#delete").onclick = async (event) => {
@@ -167,10 +168,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
+          reload(title, comment, photo_data);
         };
 
       </script>
