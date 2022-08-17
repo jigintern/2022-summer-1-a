@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+div {
+  text-align: center;
+}
+
+.click {
+  color: white;
+  width: 200px;
+  padding: 10px;
+  margin: auto 10px;
+  margin: 0px;
+  font-size: 20px;
+  border-radius: 30px;
+  border: none;
+}
+
+#home {
+  background-color: orange;
+}
+
+#wear {
+  background-color: red;
+  
+}
+
+#map{
+  background-color: aqua;
+}
+
+#wbgt {
+  background-color: white;
+  font-size: 30px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 40px;
+}
+
+h1 {
+  color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
+  background:aqua;
+  text-align: center;
+}
+

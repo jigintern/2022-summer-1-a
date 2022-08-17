@@ -7,24 +7,31 @@
 </head>
 
 <body>
-  <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text" />
-  <button id="search">検索</button>
+  <h1>☀熱中症対策アプリ☀</h1>
   <div>
-    <button id=home>ホーム</button>
-    <button id=wear>コーディネート</button>
+    <button class="click" id="home">ホーム</button>
+    <button class="click" id="wear">コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
-    <button id=map>クールマップ</button>
+    <button class="click" id="map">クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
 
     <p>
-      <button id="wbgt">暑さ指数は？</button><br>
-      ここに暑さ指数とかだす?
+      <button id="wbgt">現在地の暑さ指数は？</button>
     <div id="wbgt_val"></div> 
+    </p>
+
+    <p>
+      <nobr id="wbgt_message"></nobr>
+    </p>
+
+    <p>
+      <div id="heatstroke"></div>
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
     <p>
-      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      役に立つサイト↓<br>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><br>
       <a href="https://tenki.jp/">tenki.jp/ </a>
     </p>
 
@@ -51,12 +58,6 @@
           var lat = position.coords.latitude; //緯度
           var lon = position.coords.longitude; //経度
 
-          //jsonデータを作成
-          /*var json_data = {
-            'lat' : lat,
-            'lon' : lon
-          };*/
-
           //位置情報をPOSTでサーバーに送信
           const response = await fetch("/loc", {
             method: "POST",
@@ -68,7 +69,44 @@
           const wbgt = values.split(',')[0];
           const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
-          para.innerText = `${wbgt}`;
+          const message = document.querySelector("#wbgt_message");//メッセージの変数
+          const deadman = document.querySelector("#heatstroke");//搬送者数
+          //暑さ指数に応じて色とかフォントサイズを変えたい
+
+          if(Number(wbgt) >= 31){ 
+            document.getElementById("wbgt_val").style.fontSize = "40px" ;
+            document.getElementById("wbgt_val").style.color = "black" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "red" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            document.getElementById("wbgt_message").style.color = "red" ;
+            message.innerText = "非常に危険なので外出や運動は避けましょう!"
+          }else if(Number(wbgt) >= 28){
+            document.getElementById("wbgt_val").style.fontSize = "40px" ;
+            document.getElementById("wbgt_val").style.color = "black" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "orange" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            message.innerText = "10分おきには水分、塩分を取り休憩することを心がけましょう"
+          }else if(Number(wbgt) >= 25){
+            document.getElementById("wbgt_val").style.fontSize = "40px" ;
+            document.getElementById("wbgt_val").style.color = "black" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
+          }else{
+            message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
+          }
+          
+          document.getElementById("heatstroke").style.fontSize = "40px" ;
+          document.getElementById("heatstroke").style.color = "white" ;
+          document.getElementById("heatstroke").style.backgroundColor = "purple" ;
+          document.getElementById("heatstroke").style.textAlign = "center" ;
+          document.getElementById("heatstroke").style.border = "none" ;
+          
+          para.innerText = "あなたのまわりの暑さ指数: "+`${wbgt}`; 
+          deadman.innerText = "あなたのまわりの搬送者数:" + `${people}`;//表示test
         }
 
         //位置情報の取得に失敗したら
@@ -77,12 +115,6 @@
         }
       }
     </script>
-
-    <style>
-      h1 {
-        color: red
-      }
-    </style>
   </div>
 </body>
 
