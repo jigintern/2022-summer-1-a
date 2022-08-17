@@ -19,7 +19,9 @@
       <button id="wbgt">現在地の暑さ指数は？</button><br>
     <div id="wbgt_val"></div> 
     </p>
+    
     <nobr id="wbgt_message"></nobr>
+
     <p>
       <div id="heatstroke"></div>
     </p>
@@ -77,11 +79,17 @@
           if(Number(wbgt) >= 31){ 
             document.getElementById("wbgt_val").style.fontSize = "50px" ;
             document.getElementById("wbgt_val").style.color = "red" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
             document.getElementById("wbgt_message").style.color = "red" ;
             message.innerText = "非常に危険なので外出や運動は避けましょう!"
           }else if(Number(wbgt) >= 28){
             document.getElementById("wbgt_val").style.fontSize = "40px" ;
             document.getElementById("wbgt_val").style.color = "orangered" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
             message.innerText = "10分おきには水分、塩分を取り休憩することを心がけましょう"
           }else if(Number(wbgt) >= 25){
             document.getElementById("wbgt_val").style.fontSize = "30px" ;
@@ -91,6 +99,11 @@
 
           para.innerText = "あなたのまわりの暑さ指数: "+`${wbgt}`; 
           deadman.innerText = "あなたのまわりの搬送者数:" + `${people}`;//表示test
+          document.getElementById("heatstroke").style.fontSize = "40px" ;
+          document.getElementById("heatstroke").style.color = "white" ;
+          document.getElementById("heatstroke").style.backgroundColor = "purple" ;
+          document.getElementById("heatstroke").style.textAlign = "center" ;
+          document.getElementById("heatstroke").style.border = "none" ;
         }
 
         //位置情報の取得に失敗したら
@@ -99,13 +112,7 @@
         }
       }
     </script>
-
-    <style>
-      h1{
-        color: red
-      }
-    </style>
-     </div>
+  </div>
 </body>
 
 </html>
