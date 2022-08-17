@@ -67,7 +67,8 @@
           const wbgt = values.split(',')[0];
           const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
-          //暑さ指数に応じて色とかフォントサイズを変えたい
+         /* //暑さ指数に応じて色とかフォントサイズを変えたい
+
           if(Number(wbgt) <= 31){ 
             documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
             documents.getElementById("#wbgt_val").style.color = "red" ;
@@ -77,7 +78,9 @@
           }else if(Number(wbgt) <= 25){
             documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
             documents.getElementById("#wbgt_val").style.color = "yellow" ;
-          }//壊したらごめんなさい byこうへい
+
+          }//壊したらごめんなさい byこうへい */
+
           para.innerText = `${wbgt}`; 
         }
 
