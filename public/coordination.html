@@ -24,16 +24,16 @@
     <div>タイトル</div>
     <div><input id="title" type="text" /></div>
     <div>画像</div>
-    <form method="post" enctype="multipart/form-data">
-      <input id="file-sample" type="file">
+    <form action="coordination.html" method="post" enctype="multipart/form-data">
+      <input id="file-sample" type="file" required accept="image/*">
       <img id="file-preview" width="400">
-
 
     <div>コメント</div>
     <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
     <div><button id="tweet">投稿</button></div>
     <p id = "title"></p>
     <p id = "comment"></p>
+
     <img id="file-show" width="400"><div>
     <div><button id="back">前の投稿</button></div>
     <div><button id="next">次の投稿</button></div>
@@ -92,6 +92,11 @@
         }
 
 
+        function reload(title, comment, photo_data){
+          // 写真を表示
+          var img = document.getElementById('file-show');
+          img.src = photo_data;
+        }
 
         let photo_data = "";
         // 画像の読み込み,文字コードに変換
@@ -156,6 +161,9 @@
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
+
+          reload(title, comment, photo_data);
+
         };
 
         document.querySelector("#back").onclick = async (event) => {
@@ -180,6 +188,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
+
             //タイトルを表示
           let para = document.querySelector("#title");
 
@@ -189,6 +198,9 @@
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
+
+          reload(title, comment, photo_data);
+
         };
 
         document.querySelector("#delete").onclick = async (event) => {
@@ -214,6 +226,7 @@
           let photo_data = data[2];
 
 
+
            //タイトルを表示
           let para = document.querySelector("#title");
 
@@ -223,6 +236,8 @@
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
+
+          reload(title, comment, photo_data);
 
         };
 

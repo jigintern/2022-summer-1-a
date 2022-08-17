@@ -120,24 +120,12 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/code_info2") {
     const requestJson = await req.json();
     let id = Number(requestJson.id);
-    console.log(id);
     obj = await supabase.from('items').select();
     if (obj.error == null) {
       let title = obj.data[id].title;
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
       return new Response(title + '@' + comment + '@' + photo_data);
-
-      /*
-      for (let i in obj.data) {
-        if (obj.data[i].id == id) {
-          let title = obj.data[i].title;
-          let comment = obj.data[i].comment;
-          let photo_data = obj.data[i].photo_data;
-          return new Response(title + '@' + comment + '@' + photo_data);
-        }
-      }*/
-
     } else {
       return new Response(obj.error.message);
     }
@@ -163,6 +151,10 @@ serve(async (req) => {
       return new Response(id_del-1);
     }
   };
+
+
+
+
 
   return serveDir(req, {
     fsRoot: "public",
