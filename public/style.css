@@ -1,14 +1,17 @@
 @charset "utf-8";
 
+div {
+  text-align: center;
+}
+
 .click {
   color: white;
   width: 200px;
   padding: 10px;
-
+  margin: auto 10px;
   margin: 0px;
   font-size: 20px;
   border-radius: 30px;
-  text-align: center;
   border: none;
 }
 
@@ -17,7 +20,8 @@
 }
 
 #wear {
-  background-color: red;
+  background-color: plum;
+  
 }
 
 #map{
@@ -37,3 +41,4 @@ h1 {
   background:cyan;
  text-align: center;
 }
+
