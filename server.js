@@ -101,7 +101,7 @@ serve(async (req) => {
     // データ取得までsleep
     while (String(wbgt_val)=="undefined" || String(people_val)=="undefined") {
       const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await _sleep(500);
+      await _sleep(50);
     }
 
     return new Response(String(wbgt_val) + ',' + String(people_val));
@@ -186,7 +186,7 @@ serve(async (req) => {
     // データ取得までsleep
     while (String(shop_info)=="undefined") {
       const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await _sleep(50);
+      await _sleep(500);
     }
 
     let elements = shop_info.elements;
