@@ -7,8 +7,7 @@
 </head>
 
 <body>
-  <h1 style="display:inline;">☀熱中症対策アプリ☀</h1> <input id="mitei" type="text" />
-  <button id="search">検索</button>
+  <h1>☀熱中症対策アプリ☀</h1>
   <div>
     <button class="click" id="home">ホーム</button>
     <button class="click" id="wear">コーディネート</button>
@@ -19,6 +18,10 @@
     <p>
       <button id="wbgt">現在地の暑さ指数は？</button><br>
     <div id="wbgt_val"></div> 
+    </p>
+      <nobr id="wbgt_message"></nobr>
+    <p>
+      <div id="heatstroke"></div>
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
@@ -67,18 +70,39 @@
           const wbgt = values.split(',')[0];
           const people = values.split(',')[1];
           const para = document.querySelector("#wbgt_val");
+          const message = document.querySelector("#wbgt_message");//メッセージの変数
+          const deadman = document.querySelector("#heatstroke");//搬送者数
           //暑さ指数に応じて色とかフォントサイズを変えたい
-          if(Number(wbgt) <= 31){ 
-            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            documents.getElementById("#wbgt_val").style.color = "red" ;
-          }else if(Number(wbgt) <= 28){
-            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            documents.getElementById("#wbgt_val").style.color = "orangered" ;
-          }else if(Number(wbgt) <= 25){
-            documents.getElementById("#wbgt_val").style.fontSize = "20px" ;
-            documents.getElementById("#wbgt_val").style.color = "yellow" ;
-          }//壊したらごめんなさい byこうへい
-          para.innerText = `${wbgt}`; 
+
+          if(Number(wbgt) >= 31){ 
+            document.getElementById("wbgt_val").style.fontSize = "50px" ;
+            document.getElementById("wbgt_val").style.color = "red" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            document.getElementById("wbgt_message").style.color = "red" ;
+            message.innerText = "非常に危険なので外出や運動は避けましょう!"
+          }else if(Number(wbgt) >= 28){
+            document.getElementById("wbgt_val").style.fontSize = "40px" ;
+            document.getElementById("wbgt_val").style.color = "orangered" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            message.innerText = "10分おきには水分、塩分を取り休憩することを心がけましょう"
+          }else if(Number(wbgt) >= 25){
+            document.getElementById("wbgt_val").style.fontSize = "30px" ;
+            document.getElementById("wbgt_val").style.color = "orange" ;
+            message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
+
+          }
+
+          para.innerText = "あなたのまわりの暑さ指数: "+`${wbgt}`; 
+          deadman.innerText = "あなたのまわりの搬送者数:" + `${people}`;//表示test
+          document.getElementById("heatstroke").style.fontSize = "40px" ;
+          document.getElementById("heatstroke").style.color = "white" ;
+          document.getElementById("heatstroke").style.backgroundColor = "purple" ;
+          document.getElementById("heatstroke").style.textAlign = "center" ;
+          document.getElementById("heatstroke").style.border = "none" ;
         }
 
         //位置情報の取得に失敗したら
@@ -88,12 +112,9 @@
       }
     </script>
 
-    <style>
-      h1 {
-        color: red
-        
-      }
-    </style>
+    <!--<style>
+
+    </style>-->
   </div>
 </body>
 
