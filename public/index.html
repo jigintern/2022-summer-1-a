@@ -47,7 +47,7 @@
         navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
-        function success(position) {
+        async function success(position) {
           var lat = position.coords.latitude; //緯度
           var lon = position.coords.longitude; //経度
 
