@@ -3,6 +3,10 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+<style>
+  #mapid { height: 400px; width:400px; }
+</style>
 </head>
 
 <body>
@@ -10,46 +14,60 @@
   <h2 style="display:inline;">クールマップ</h2>
   <input id="mitei" type="text" />
   <button id="search">検索</button>
-  <div>
-    <button id=home>ホーム</button>
-    <button id=wear>コーディネート</button>
-    <!--服装共有用SNS(?)に移動-->
-    <button id=map>クールマップ</button>
-    <!--涼が取れる施設を表示するマップに移動-->
 
-    <p>イイ感じの施設にピンが刺さった近くの地図でも表示?</p>
-    <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
+<div><button id = home>ホーム</button>
+<button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
+<button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
+
+<div id="mapid"></div>
+
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <script type="text/javascript">
+    var mymap = L.map('mapid',{
+      center: [35.710063, 139.8107],
+      zoom: 16
+    });
+    
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
+    }).addTo(mymap);
+    
+    L.marker([35.710063, 139.8107])
+      .addTo(mymap)
+      .bindP <h1 id="welcomeMessage"></h1>
+opup("スカイツリーはここ！")
+      .openPopup();
+  </script>
+<p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
 
 
-    <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-    <!--参考元-->
-    <a href="https://tenki.jp/">tenki.jp/ </a>
-    <h1 id="welcomeMessage"></h1>
+<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><!--参考元-->
+<a href="https://tenki.jp/">tenki.jp/ </a>
+ 
+  <script type="module">
+    window.onload = async (event) => {
+    };
+    
+    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+      location.href = 'index.html';//homeのページに移動
+    }
 
-    <script type="module">
-      window.onload = async (event) => {
-      };
+    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
+      location.href = 'coordination.html';//コーディネートのページに移動
+    }
 
-      document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-        location.href = 'index.html';//homeのページに移動
-      }
+  </script>
 
-      document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
-        location.href = 'coordination.html';//コーディネートのページに移動
-      }
+<style>
+  h1{
+    color: red
+  }
+  h2{
+    color:cyan
+  }
 
-    </script>
+</style>
 
-    <style>
-      h1 {
-        color: red
-      }
-
-      h2 {
-        color: cyan
-      }
-    </style>
-  </div>
 </body>
 
 </html>
