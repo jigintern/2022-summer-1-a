@@ -11,7 +11,8 @@
   <h2 style="display:inline;">コーディネート</h2>
   <input id="mitei" type="text" />
   <button id="search">検索</button>
-  <div><button id=home>ホーム</button>
+  <div>
+    <button id=home>ホーム</button>
     <button id=wear>コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
     <button id=map>クールマップ</button>
@@ -19,51 +20,48 @@
 
     <p>投稿されたものがここに表示される?</p>
 
-<div>タイトル</div>    
-<div><input id = "title" type = "text"/></div>
-<div>画像</div>
-<form action="coordination.html" method="post" enctype="multipart/form-data" >
-  <input type="file" name="test" required accept="image/*">
-<div>コメント</div>
-<div><input id = "comment" type="text"style="width: 250px; height: 100px;"/></div>
-<div><button id="tweet">投稿</button></div>
+    <div>タイトル</div>
+    <div><input id="title" type="text" /></div>
+    <div>画像</div>
+    <form action="coordination.html" method="post" enctype="multipart/form-data">
+      <input type="file" name="test" required accept="image/*">
+      <div>コメント</div>
+      <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
+      <div><button id="tweet">投稿</button></div>
 
-    <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-    <!--参考元-->
-    <a href="https://tenki.jp/">tenki.jp/ </a>
-    <h1 id="welcomeMessage"></h1>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+      <!--参考元-->
+      <a href="https://tenki.jp/">tenki.jp/ </a>
+      <h1 id="welcomeMessage"></h1>
 
-  <script type="module">
-    window.onload = async (event) => {
-      
-    };
+      <script type="module">
+        window.onload = async (event) => {
 
-    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-      location.href = 'index.html';//homeのページに移動
-    }
-
-    document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
-      location.href = 'map.html';//マップのページに移動
-    }
-    
-    document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
-      location.href = 'coordinationupload.html';
-    }
-  </script>
-  
-
-  <style>
-    h1 {
-      color: red
-    }
-
-    h2 {
-      color: plum
-    }
-  </style>
+        };
 
 
+        document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+          location.href = 'index.html';//homeのページに移動
+        }
 
+        document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
+          location.href = 'map.html';//マップのページに移動
+        }
+        document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
+          location.href = 'coordinationupload.html';
+        }
+      </script>
+
+      <style>
+        h1 {
+          color: red
+        }
+
+        h2 {
+          color: plum
+        }
+      </style>
+  </div>
 </body>
 
 </html>

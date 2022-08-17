@@ -9,12 +9,12 @@
 </style>
 </head>
 
-<body> 
-
+<body>
   <h1>☀熱中症対策アプリ☀</h1>
-  <h2 style="display:inline;">クールマップ</h2> 
-  <input id="mitei" type="text"/>
+  <h2 style="display:inline;">クールマップ</h2>
+  <input id="mitei" type="text" />
   <button id="search">検索</button>
+
 <div><button id = home>ホーム</button>
 <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
 <button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
@@ -34,7 +34,8 @@
     
     L.marker([35.710063, 139.8107])
       .addTo(mymap)
-      .bindPopup("スカイツリーはここ！")
+      .bindP <h1 id="welcomeMessage"></h1>
+opup("スカイツリーはここ！")
       .openPopup();
   </script>
 <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
@@ -42,8 +43,7 @@
 
 <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><!--参考元-->
 <a href="https://tenki.jp/">tenki.jp/ </a>
-  <h1 id="welcomeMessage"></h1>
-
+ 
   <script type="module">
     window.onload = async (event) => {
     };
