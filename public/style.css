@@ -9,10 +9,10 @@ div {
   width: 200px;
   padding: 10px;
   margin: auto 10px;
+  margin: 0px;
   font-size: 20px;
   border-radius: 30px;
   border: none;
-  justify-content: space-between;
 }
 
 #home {

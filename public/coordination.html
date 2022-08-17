@@ -21,6 +21,8 @@
 
     <p>投稿されたものがここに表示される?</p>
 
+    <div>お名前</div>
+    <div><input id="name" type="text" /></div>
     <div>タイトル</div>
     <div><input id="title" type="text" /></div>
     <div>画像</div>
@@ -37,7 +39,6 @@
 
     <script type="module">
       window.onload = async (event) => {
-
       };
 
 
@@ -51,6 +52,7 @@
       document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
         location.href = 'coordinationupload.html';
       }
+
     </script>
 
     <style>
