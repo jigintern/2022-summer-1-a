@@ -10,6 +10,7 @@ let pre_ids = [[11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], [31], [
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
+  console.log(req.method);
 
   if (req.method === "GET" && pathname === "/tips") {
     
@@ -59,6 +60,8 @@ serve(async (req) => {
         }
       }
     }
+    let wbgt_val;
+    let people_val;
 
     async function callApi_wbgt(url_wbgt) {
       // CSV各行読み込み
@@ -82,15 +85,17 @@ serve(async (req) => {
       // let month = max_key.substr(4, 2);
       // let day = max_key.substr(6, 2);
       // let hour = max_key.substr(8);
-      let wbgt_val = data[max_key]/10;
-      let people_val = wbgt_people[pre_id][String(wbgt_val)];
-      console.log(wbgt_val, people_val);
-      return new Response(String(wbgt_val)+","+String(people_val));
+      wbgt_val = data[max_key]/10;
+      people_val = wbgt_people[pre_id][String(wbgt_val)];
     };
     const url_wbgt = 'https://www.wbgt.env.go.jp/prev15WG/dl/yohou_' + id + '.csv';
     callApi_wbgt(url_wbgt);
-  }
 
+    const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    await _sleep(1000);
+
+    return new Response(String(wbgt_val)+','+String(people_val));
+  }
 
 
   return serveDir(req, {
