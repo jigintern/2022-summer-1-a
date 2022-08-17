@@ -30,6 +30,7 @@
   text-align: center;
   border-radius: 40px;
 }
+
 h1 {
-  color: red 
+  color: red /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
 }
