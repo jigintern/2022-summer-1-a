@@ -19,7 +19,7 @@
     <p>
       <button id="wbgt">暑さ指数は？</button><br>
       ここに暑さ指数とかだす?
-    <div id="wbgt_val"></div 
+    <div id="wbgt_val"></div> 
     </p>
     <!--暑さ指数及び搬送者数の問題に関してはゆおのれくんと要相談-->
 
@@ -42,9 +42,9 @@
         location.href = 'map.html';//マップのページに移動
       }
 
-      documet.querySelector("#wbgt").onclick = async (event) => {
+      document.querySelector("#wbgt").onclick = async (event) => {
         //位置情報を取得
-        /*navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error);
 
         //位置情報の取得に成功したら
         function success(position) {
@@ -52,16 +52,16 @@
           var lon = position.coords.longitude; //経度
 
           //josoデータを作成
-          var json_data = {
-            'let' : let,
+          /*var json_data = {
+            'lat' : lat,
             'lon' : lon
-          };
+          };*/
 
           //位置情報をPOSTでサーバーに送信
           const response = await fetch("/loc", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(json_data)
+            body: JSON.stringify(lat, lon)
           });
 
           const wbgt = await response.text(); //暑さ指数をサーバー側から取得
@@ -72,7 +72,7 @@
         //位置情報の取得に失敗したら
         function error() {
           alert("位置情報が取得できませんでした");
-        }*/
+        }
       }
     </script>
 
