@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -23,14 +24,6 @@
     <div>タイトル</div>
     <div><input id="title" type="text" /></div>
     <div>画像</div>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    <form action="coordination.html" method="post" enctype="multipart/form-data">
-    <input type="file" name="test" required accept="image/*">
-    <div>コメント</div>
-    <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
-    <div><button id="tweet">投稿</button></div>
-=======
     <form method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file">
       <img id="file-preview" width="400">
@@ -42,8 +35,7 @@
       <div><button id="back">前の投稿</button></div>
       <div><button id="next">次の投稿</button></div>
       <div><button id="delete">現在の投稿を削除</button></div>
-      
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
+
 
       <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
       <!--参考元-->
@@ -67,37 +59,6 @@
           location.href = 'coordinationupload.html';
         }
 
-
-
-<<<<<<< HEAD
-      h2 {
-        color: plum
-      }
-    </style>
-=======
-    <form method="post" enctype="multipart/form-data">
-      <input id="file-sample" type="file">
-      <img id="file-preview" width="400">
-    </form>
-      <div>コメント</div>
-      <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
-      <div><button id="tweet">投稿</button></div>
-      
-      <p id="title"></p><!--タイトル-->>
-      <p id="comment"></p><!--投稿内容-->>
-      <img id="file-show" width="400"><div>
-
-      <div><button id="back">前の投稿</button></div>
-      <div><button id="next">次の投稿</button></div>
-      <div><button id="delete">現在の投稿を削除</button></div>
-      
-
-      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-      <!--参考元-->
-      <a href="https://tenki.jp/">tenki.jp/ </a>
-      <h1 id="welcomeMessage"></h1>
-
-      <script type="module">
         window.onload = async (event) => {
 
         };
@@ -116,8 +77,6 @@
 
 
 
-=======
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
         let photo_data = "";
         // 画像の読み込み,文字コードに変換
         document.getElementById('file-sample').addEventListener('change', function (e) {
@@ -172,15 +131,12 @@
           let comment = data[1];
           let photo_data = data[2];
 
-<<<<<<< HEAD
           //タイトルを表示
           let para = document.querySelector("#title");
 
           //コメントを表示
           let para2 = document.querySelector("#comment");
 
-=======
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
@@ -208,16 +164,12 @@
           let comment = data[1];
           let photo_data = data[2];
 
-<<<<<<< HEAD
             //タイトルを表示
           let para = document.querySelector("#title");
 
             //コメントを表示
           let para2 = document.querySelector("#comment");
 
-
-=======
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
@@ -245,16 +197,13 @@
           let comment = data[1];
           let photo_data = data[2];
 
-<<<<<<< HEAD
+
            //タイトルを表示
           let para = document.querySelector("#title");
 
           //コメントを表示
           let para2 = document.querySelector("#comment");
 
-
-=======
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
@@ -272,10 +221,8 @@
           color: plum
         }
       </style>
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> f60cc82d1ddc7977969272f989eb1969e3621ebd
+
+
   </div>
 </body>
 
