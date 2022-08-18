@@ -3,7 +3,7 @@
 h1 {
   color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
   background:cyan;
- text-align: center;
+  text-align: center;
 }
 
 div {
@@ -25,13 +25,27 @@ div {
   background-color: orange;
 }
 
+#home:hover {
+  background-color: orange;
+  filter: brightness(90%);
+}
+
 #wear {
   background-color: plum;
-  
+}
+
+#wear:hover {
+  background-color: plum;
+  filter: brightness(90%);
 }
 
 #map{
   background-color: aqua;
+}
+
+#map:hover{
+  background-color: aqua;
+  filter: brightness(90%);
 }
 
 #wbgt {
@@ -42,10 +56,7 @@ div {
   border-radius: 40px;
 }
 
-#mapid {
-  align-content: center;
-}
-
-#file_show{
-  text-align: left;
+#wbgt:hover {
+  background-color: red;
+  color: yellow;
 }
