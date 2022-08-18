@@ -36,6 +36,10 @@ div {
   border-radius: 40px;
 }
 
+#mapid {
+  align-content: center;
+}
+
 h1 {
   color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
   background:cyan;
