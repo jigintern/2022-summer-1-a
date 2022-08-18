@@ -29,11 +29,12 @@
     <img id="file-show" height="400"><!--画像表示-->
     </div>
     
-      <div><button id="back">前の投稿</button></div>
+    <div><button id="back">前の投稿</button></div>
     <div><button id="next">次の投稿</button></div>
     <div><button id="delete">現在の投稿を削除</button></div>
-      
 
+    <div>ハンドルネーム</div><!--タイトル入力フォーム-->
+    <div><input id="name" type="text" /></div>
     <div>タイトル</div><!--タイトル入力フォーム-->
     <div><input id="title" type="text" /></div>
     <div>画像</div>
@@ -123,12 +124,13 @@
         let id = 0;
         // 投稿ボタン
         document.querySelector("#tweet").onclick = async (event) => {
+          let name = document.querySelector("#name").value;
           let title = document.querySelector("#title").value;
           let comment = document.querySelector("#comment").value;
           const response = await fetch("/code_info", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, comment, photo_data })
+            body: JSON.stringify({ title, comment, photo_data, name })
           });
           let result = await response.text();
         };
