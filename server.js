@@ -180,6 +180,9 @@ serve(async (req) => {
     const requestJson = await req.json();
     lat = requestJson.lat; // 緯度
     lon = requestJson.lon; // 経度
+    let type_name = requestJson.point_name; //
+    let type = type_name.split('@')[0];
+    let place = type_name.split('@')[1];
     //lat = 35;
     //lon = 135;
     let dist = 1; //km
@@ -195,7 +198,7 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["' + type + '"="' + place + '"];out;';
     await callApi_overpass(url_overpass);
 
     let elements = shop_info.elements;
@@ -219,7 +222,6 @@ serve(async (req) => {
     console.log(return_text);
     return new Response(return_text);
   };
-
 
   return serveDir(req, {
     fsRoot: "public",
