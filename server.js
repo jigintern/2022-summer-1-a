@@ -15,6 +15,7 @@ let obj; // Jsonobj, select(),insert()で使用
 let lat;
 let lon;
 
+
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
@@ -157,11 +158,11 @@ serve(async (req) => {
 
   // mapのために店舗情報を返す（緯度と経度を最初に受け取る）
   if (req.method === "POST" && pathname === "/search_shop") {
-    const requestJson = await req.json();
-    lat = requestJson.lat; // 緯度
-    lon = requestJson.lon; // 経度
-    //lat = 35;
-    //lon = 135;
+    //const requestJson = await req.json();
+    //lat = requestJson.lat; // 緯度
+    //lon = requestJson.lon; // 経度
+    lat = 35;
+    lon = 135;
     let dist = 1; //km
 
     let shop_info;
@@ -193,15 +194,18 @@ serve(async (req) => {
     let shop_lat = "", shop_lon = "", shop_name = "";
     let sp_key = "@@@"
     for (let i in elements) {
-      if (i==elements.length-1){sp_key = ""}
-      shop_lat += String(elements[i].lat) + sp_key;
-      shop_lon += String(elements[i].lon) + sp_key;
-      if (String(elements[i].tags.branch) != 'undefined') {
-        shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
-      } else {
-        shop_name += elements[i].tags.name + sp_key;
+      if (String(elements[i].lat) != "undefined" && String(elements[i].lon) != "undefined" && String(elements[i].tags.name) != "undefined") {
+        if (i == elements.length - 1) { sp_key = "" }
+        shop_lat += String(elements[i].lat) + sp_key;
+        shop_lon += String(elements[i].lon) + sp_key;
+        if (String(elements[i].tags.branch) != 'undefined') {
+          shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
+        } else {
+          shop_name += elements[i].tags.name + sp_key;
+        }
       }
     }
+
     // return_text : 属性\n区切り，項目@@@区切り
     let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
     console.log(return_text);
