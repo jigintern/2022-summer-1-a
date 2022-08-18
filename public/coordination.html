@@ -22,12 +22,11 @@
       <button class="click" id="map">クールマップ</button>
       <!--涼が取れる施設を表示するマップに移動-->
     
-      
     <p>
       <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
     <p id = "title_out"></p><!--タイトル表示-->
     <p id = "comment_out"></p><!--本文表示-->
-    <img id="file-show" width="400"><!--画像表示-->
+    <img id="file-show" height="400"><!--画像表示-->
     </div>
     
       <div><button id="back">前の投稿</button></div>
@@ -64,9 +63,10 @@
           });
           let result = await response.text();
           let data = result.split('@');
-          let title = data[0];
-          let comment = data[1];
-          let photo_data = data[2];
+          let name = data[0];
+          let title = data[1];
+          let comment = data[2];
+          let photo_data = data[3];
 
           //タイトルを表示
           let para = document.querySelector("#title_out");
@@ -82,6 +82,7 @@
         }
 
         window.onload = async (event) => {
+          const response = await fetch("/reset_obj");
           const response_id = await fetch("/code_info");
           let max_id = await response_id.text();
           max_id = Number(max_id); // 1~idまでが時系列

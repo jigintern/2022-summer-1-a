@@ -17,7 +17,7 @@ let lat;
 let lon;
 
 let post_key = 0;
-let post_flg = 0;
+let post_flg = 1;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -110,6 +110,12 @@ serve(async (req) => {
     return new Response(String(wbgt_val) + ',' + String(people_val));
   }
 
+  //　コーディネート初期化
+  if (req.method === "POST" && pathname === "/reset_obj") {
+    console.log("reset");
+    main_obj = null;
+  }
+
   // コーディネートの投稿
   if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
@@ -140,7 +146,8 @@ serve(async (req) => {
       let title = obj.data[id].title;
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
-      return new Response(title + '@' + comment + '@' + photo_data);
+      let name = obj.data[id].name;
+      return new Response(name + '@' + title + '@' + comment + '@' + photo_data);
     } else {
       return new Response(obj.error.message);
     }
