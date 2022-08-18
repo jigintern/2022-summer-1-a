@@ -46,7 +46,11 @@
     <table><tr>
       <td><div id="mapid"></div></td>
 
-      <td><table><tr>
+      <td>
+        <button id = "one" style="display:inline;">施設</button>
+        <button id = "two" style="display:inline;">飲食</button>
+        <button id = "three" style="display:inline;">ショップ</button>
+        <table><tr>
         <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
         <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
         <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
@@ -64,7 +68,8 @@
         <table><tr>
         <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
         <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
-      </tr></table></td>
+      </tr></table>
+    </td>
     </tr></table>
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
