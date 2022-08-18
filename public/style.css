@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+h1 {
+  color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
+  background:cyan;
+ text-align: center;
+}
+
 div {
   text-align: center;
 }
@@ -36,9 +42,10 @@ div {
   border-radius: 40px;
 }
 
-h1 {
-  color: red; /*なぜかボタンを押したときに見出しの色が消えるのでこちらに移転させていただきました*/
-  background:cyan;
- text-align: center;
+#mapid {
+  align-content: center;
 }
 
+#file_show{
+  text-align: left;
+}
