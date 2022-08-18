@@ -20,12 +20,12 @@
       <button class="click" id="map">クールマップ</button>
       <!--涼が取れる施設を表示するマップに移動-->
   
-      <p>
+    <p>
     <p id = "title_out"></p><!--タイトル表示-->
     <p id = "comment_out"></p><!--本文表示-->
     <img id="file-show" width="400"><div><!--画像表示-->
     
-      <div><button id="back">前の投稿</button></div>
+    <div><button id="back">前の投稿</button></div>
     <div><button id="next">次の投稿</button></div>
     <div><button id="delete">現在の投稿を削除</button></div>
       
@@ -51,22 +51,17 @@
 
       <script type="module">
         window.onload = async (event) => {
-
         };
-
         document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
           location.href = 'index.html';//homeのページに移動
         }
-
         document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
           location.href = 'map.html';//マップのページに移動
         }
         document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
           location.href = 'coordinationupload.html';
         }
-
         window.onload = async (event) => {
-
         };
 
 
@@ -76,7 +71,7 @@
           para.innerText = `${title}`;
           //コメント
           let para2 = document.getElementById("comment_out");
-          para.innerText = `${comment}`;
+          para2.innerText = `${comment}`;
           // 写真を表示
           var img = document.getElementById('file-show');
           img.src = photo_data;
@@ -119,6 +114,7 @@
             body: JSON.stringify({ title, comment, photo_data })
           });
           let result = await response.text();
+          console.log(result);
         };
 
         // showボタンでデータベースの指定したidのtitle,comment,photo_dataを取得
@@ -144,20 +140,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
-          //タイトルを表示
-          let para = document.querySelector("#title_out");
-          para.innerText = `${title}`;
-
-          //コメントを表示
-          let para2 = document.querySelector("#comment_out");
-          para2.innerText = `${comment}`;
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
           reload(title, comment, photo_data);
-
         };
 
         document.querySelector("#back").onclick = async (event) => {
@@ -182,20 +165,7 @@
           let comment = data[1];
           let photo_data = data[2];
 
-            //タイトルを表示
-          let para = document.querySelector("#title_out");
-          para.innerText = `${title}`;
-
-            //コメントを表示
-          let para2 = document.querySelector("#comment_out");
-          para2.innerText = `${comment}`;
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
           reload(title, comment, photo_data);
-
         };
 
         document.querySelector("#delete").onclick = async (event) => {
@@ -219,19 +189,6 @@
           let title = data[0];
           let comment = data[1];
           let photo_data = data[2];
-
-
-           //タイトルを表示
-          let para = document.querySelector("#title_out");
-          para.innerText = `${title}`;
-
-          //コメントを表示
-          let para2 = document.querySelector("#comment_out");
-          para2.innerText = `${comment}`;
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
 
           reload(title, comment, photo_data);
 
