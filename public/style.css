@@ -21,6 +21,14 @@ div {
   border: none;
 }
 
+.click2 {
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+}
+
 #home {
   background-color: orange;
 }
@@ -61,6 +69,46 @@ div {
   color: yellow;
 }
 
-#file_show {
-  text-align: center;
+#back {
+  width: 200px;
+  background-color: deepskyblue;
 }
+
+#back:hover {
+  filter: brightness(90%);
+}
+
+#next {
+  width: 200px;
+  background-color: deepskyblue;
+}
+
+#next:hover {
+  filter: brightness(90%);
+}
+
+#delete {
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+}
+
+#delete:hover {
+  filter: brightness(90%);
+}
+
+#tweet {
+  width: 100px;
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+}
+
+#tweet:hover {
+  filter: brightness(90%);
+}
+
+table{
+  margin:auto;
+}
+
