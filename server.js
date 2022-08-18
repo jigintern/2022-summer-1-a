@@ -17,7 +17,7 @@ let lat;
 let lon;
 
 let post_key = 0;
-let post_flg = 1;
+let post_flg = 0;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -111,9 +111,8 @@ serve(async (req) => {
   }
 
   //　コーディネート初期化
-  if (req.method === "POST" && pathname === "/reset_obj") {
-    console.log("reset");
-    main_obj = null;
+  if (req.method === "GET" && pathname === "/reset_obj") {
+    main_obj = await supabase.from('items').select();
   }
 
   // コーディネートの投稿
