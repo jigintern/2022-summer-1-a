@@ -12,9 +12,12 @@ let url = 'https://akeajtagrjjhododqhpi.supabase.co';
 let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWFqdGFncmpqaG9kb2RxaHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA2NTA2MjIsImV4cCI6MTk3NjIyNjYyMn0.QyhEX0CaRWChJpqsfvogNWmGGYB-yNJt7XcKbE825yQ';
 const supabase = createClient(url, anon_key);
 let obj; // Jsonobj, select(),insert()で使用
+let main_obj = await supabase.from('items').select();
 let lat;
 let lon;
 
+let post_key = 0;
+let post_flg = 0;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -72,7 +75,6 @@ serve(async (req) => {
     let people_val;
 
     async function callApi_wbgt(url_wbgt) {
-      // CSV各行読み込み
       const data = CSV.toJSON(await CSV.fetch(url_wbgt))[0];
       let keys = Object.keys(data);
       let time = data[""].substr(0, 10).replace(/\//g, "");
@@ -112,6 +114,7 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
     obj = await supabase.from('items').insert(requestJson); // itemsへデータ挿入
+    post_flg++;
     if (obj.error == null) {
       return new Response("finished");
     } else {
@@ -119,11 +122,20 @@ serve(async (req) => {
     }
   }
 
+  // データベース更新確認
+  async function base_select() {
+    if (post_key != post_flg) {
+      post_key = post_flg;
+      main_obj = await supabase.from('items').select();
+    }
+    return main_obj;
+  };
+
   // コーディネートの呼び出し（タイトル，コメント，画像データを返す）
   if (req.method === "POST" && pathname === "/code_info2") {
     const requestJson = await req.json();
     let id = Number(requestJson.id);
-    obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let title = obj.data[id].title;
       let comment = obj.data[id].comment;
@@ -136,7 +148,7 @@ serve(async (req) => {
 
   // 現在の投稿数を確認
   if (req.method === "GET" && pathname === "/code_info") {
-    let obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let max_id = obj.data.length-1;
       return new Response(max_id);
@@ -151,6 +163,7 @@ serve(async (req) => {
     if (obj.error == null) {
       let id = obj.data[id_del].id;
       obj = await supabase.from('items').delete().match({ id });
+      post_flg++;
       return new Response(id_del-1);
     }
   };
@@ -181,7 +194,7 @@ serve(async (req) => {
 
     let elements = shop_info.elements;
     let shop_lat = "", shop_lon = "", shop_name = "";
-    let sp_key = "@@@"
+    let sp_key = "@@@";
     for (let i in elements) {
       if (String(elements[i].lat) != "undefined" && String(elements[i].lon) != "undefined" && String(elements[i].tags.name) != "undefined") {
         if (i == elements.length - 1) { sp_key = "" }
