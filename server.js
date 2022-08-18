@@ -111,8 +111,7 @@ serve(async (req) => {
   }
 
   //　コーディネート初期化
-  if (req.method === "POST" && pathname === "/reset_obj") {
-    console.log("reset");
+  if (req.method === "GET" && pathname === "/reset_obj") {
     main_obj = await supabase.from('items').select();
   }
 
