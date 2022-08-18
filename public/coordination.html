@@ -24,6 +24,7 @@
     <p>
       <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
     <p id = "title_out"></p><!--タイトル表示-->
+    <p id = "name_out"></p><!--おなまえ-->
     <p id = "comment_out"></p><!--本文表示-->
     <img id="file-show" width="400"><!--画像表示-->
     </div>
@@ -35,7 +36,9 @@
 
     <div>タイトル</div><!--タイトル入力フォーム-->
     <div><input id="title" type="text" /></div>
-    <div>画像</div>
+    <div>お名前</div><!--おなまえ入力フォーム-->
+    <div><input id = "name" type="text" value = "名無しさん"></div>
+    <div>画像</div><!--画像フォーム-->
     <form action="coordination.html" method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file" required accept="image/*">
       <img id="file-preview" width="400">
