@@ -60,7 +60,7 @@
 
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script type="text/javascript">
-	document.getElementById("loading").style.display ="none";
+	//document.getElementById("loading").style.display ="none";
 
 	var mymap = L.map('mapid',{
 	center: [35.710063, 139.8107],
@@ -95,8 +95,8 @@
 	var makerList = [];
 
 	async function set_point(point_name){
-		document.getElementById("result").style.display ="none";
-		document.getElementById("loading").style.display ="block";
+		//document.getElementById("result").style.display ="none";
+		//document.getElementById("loading").style.display ="block";
 
 		for (i = 0; i < makerList.length; i++){
 			mymap.removeLayer(makerList[i]);
@@ -134,6 +134,9 @@
 							//.openPopup();
 						makerList.push(maker);
 					}
+      console.log(shop_lat_list.split("@@@").length);
+      console.log(shop_lat_list_length);
+
 
 				} else {
 					console.log("場所情報のエラー");
@@ -142,15 +145,15 @@
 				console.log("場所情報のエラー");
 			}
 			
-			const result = document.querySelector("#result");
-			result.innerText = makerList.length + "件見つかりました！";
+			//const result = document.querySelector("#result");
+			//result.innerText = makerList.length + "件見つかりました！";
 		} else {
-			const result = document.querySelector("#result");
-			result.innerText = "該当する場所は見つかりませんでした";
+			//const result = document.querySelector("#result");
+			//result.innerText = "該当する場所は見つかりませんでした";
 		}
 
-		document.getElementById("result").style.display ="block";
-		document.getElementById("loading").style.display ="none";
+		//document.getElementById("result").style.display ="block";
+		//document.getElementById("loading").style.display ="none";
 	}
 </script>
 
