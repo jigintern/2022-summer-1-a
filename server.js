@@ -17,7 +17,7 @@ let lat;
 let lon;
 
 let post_key = 0;
-let post_flg = 1;
+let post_flg = 0;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
