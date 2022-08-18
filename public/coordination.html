@@ -72,9 +72,13 @@
           let comment = data[2];
           let photo_data = data[3];
 
+          // ハンドルネームを表示
+          let para = document.querySelector("#name_out");
+          para.innerText = `${name}`;
+
           //タイトルを表示
-          let para = document.querySelector("#title_out");
-          para.innerText = `${title}`;
+          let para1 = document.querySelector("#title_out");
+          para1.innerText = `${title}`;
 
           //コメントを表示
           let para2 = document.querySelector("#comment_out");
