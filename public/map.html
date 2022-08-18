@@ -12,8 +12,9 @@
   <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
   <style>
     #mapid {
-      height: 400px;
-      width: 400px;
+      height: 500px;
+      width: 500px;
+      margin: auto;
     }
 
     .center-icon {
@@ -42,39 +43,103 @@
     <button class="click" id="map">クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
 
-    <div id="mapid"></div>
+    <table><tr>
+      <td><div id="mapid"></div></td>
+
+      <td><table><tr>
+        <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
+      </tr></table>
+        <table><tr>
+        <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
+      </tr></table></td>
+    </tr></table>
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script type="text/javascript">
-      var mymap = L.map('mapid', {
+      var mymap = L.map('mapid',{
         center: [35.710063, 139.8107],
         zoom: 16
       });
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
         attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
       }).addTo(mymap);
 
-      L.marker([35.710063, 139.8107])
-        .addTo(mymap)
-        .bindPopup("スカイツリーはここ！")
-        .openPopup();
+    //スケールコントロールを最大幅200px、右下、m単位で地図に追加
+    L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 
+    var lat = 35;
+    var lon = 135;
 
+    async function onLocationFound(e) {
+      var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+      L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
+      console.log("^^");
+      lat = e.latlng.lat; //緯度
+      lon = e.latlng.lng; //経度
+    }
+    function onLocationError(e) {
+      alert('位置情報を取得できませんでした。' + e.message);
+    }
 
-      function onLocationFound(e) {
-        var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-        L.marker(e.latlng, { icon: centerIcon }).addTo(mymap);
+    mymap.on('locationfound', onLocationFound);
+    mymap.on('locationerror', onLocationError);
+    mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+
+    async function set_point(point_name){
+      console.log(point_name);
+
+      const response = await fetch("/search_shop", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({lat, lon, point_name})
+      });
+
+      const values = await response.text(); //場所をサーバー側から取得
+      var shop_lat_list = values.split('\n')[0];
+      var shop_lon_list = values.split('\n')[1];
+      var shop_name_list = values.split('\n')[2];
+
+      var splitstr = "@@@";
+      var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+      var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+      var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+
+      if (shop_lat_list_length === shop_lon_list_length){
+        if (shop_lon_list_length === shop_name_list_length){
+          for (i = 0; i < shop_lat_list_length; i++){
+            var shop_lat = shop_lat_list.split(splitstr)[i];
+            var shop_lon = shop_lon_list.split(splitstr)[i];
+            var shop_name = shop_name_list.split(splitstr)[i];
+
+            L.marker([shop_lat, shop_lon])
+              .addTo(mymap)
+              .bindPopup(shop_name)
+              .openPopup();
+          }
+        } else {
+          console.log("場所情報のエラー");
+        }
+      } else {
+        console.log("場所情報のエラー");
       }
-      function onLocationError(e) {
-        alert('位置情報を取得できませんでした。' + e.message);
-      }
-      mymap.on('locationfound', onLocationFound);
-      mymap.on('locationerror', onLocationError);
-      mymap.locate({ setView: true, maxZoom: 16, timeout: 20000 });
+    }
     </script>
 
-    <p>右に施設の選択画面があってクリックすると詳細がみれる?</p>
+  <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
 
     <script type="module">
       window.onload = async (event) => {
