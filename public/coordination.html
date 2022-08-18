@@ -23,7 +23,7 @@
       <p>
     <p id = "title_out"></p><!--タイトル表示-->
     <p id = "comment_out"></p><!--本文表示-->
-    <img id="file-show" width="400"><div>
+    <img id="file-show" width="400"><div><!--画像表示-->
     
       <div><button id="back">前の投稿</button></div>
     <div><button id="next">次の投稿</button></div>
@@ -184,9 +184,11 @@
 
             //タイトルを表示
           let para = document.querySelector("#title_out");
+          para.innerText = `${title}`;
 
             //コメントを表示
           let para2 = document.querySelector("#comment_out");
+          para2.innerText = `${comment}`;
 
           // 写真を表示
           var img = document.getElementById('file-show');
@@ -221,9 +223,11 @@
 
            //タイトルを表示
           let para = document.querySelector("#title_out");
+          para.innerText = `${title}`;
 
           //コメントを表示
           let para2 = document.querySelector("#comment_out");
+          para2.innerText = `${comment}`;
 
           // 写真を表示
           var img = document.getElementById('file-show');
