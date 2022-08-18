@@ -29,8 +29,7 @@
     </p>
 
     <p>
-      役に立つサイト↓<br>
-      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><br>
+      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
       <a href="https://tenki.jp/">tenki.jp/ </a>
     </p>
 
@@ -94,8 +93,13 @@
             document.getElementById("wbgt_val").style.textAlign = "center" ;
             document.getElementById("wbgt_val").style.border = "none" ;
             message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
-          }else{
-            message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
+          }else {
+            document.getElementById("wbgt_val").style.fontSize = "40px" ;
+            document.getElementById("wbgt_val").style.color = "black" ;
+            document.getElementById("wbgt_val").style.backgroundColor = "aqua" ;
+            document.getElementById("wbgt_val").style.textAlign = "center" ;
+            document.getElementById("wbgt_val").style.border = "none" ;
+            message.innerText = "危険性は低いですが十分注意しましょう"
           }
           
           document.getElementById("heatstroke").style.fontSize = "40px" ;
