@@ -60,3 +60,7 @@ div {
   background-color: red;
   color: yellow;
 }
+
+#file_show {
+  text-align: center;
+}
