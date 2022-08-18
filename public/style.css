@@ -107,3 +107,7 @@ div {
 #tweet:hover {
   filter: brightness(90%);
 }
+
+table{
+  margin:auto;
+}
