@@ -9,9 +9,11 @@
 <body>
 
   <h1>☀熱中症対策アプリ☀</h1>
-  <h2 style="display:inline;">コーディネート</h2>
-  <input id="mitei" type="text" />
-  <button id="search">検索</button>
+  <div>
+    <h2 style="display:inline;">コーディネート</h2>
+    <input id="mitei" type="text" />
+    <button id="search">検索</button>
+  <div>
   <div>
     <div>
       <button class="click" id="home">ホーム</button>
@@ -19,29 +21,34 @@
       <!--服装共有用SNS(?)に移動-->
       <button class="click" id="map">クールマップ</button>
       <!--涼が取れる施設を表示するマップに移動-->
-  
-      <p>
-    <p>投稿されたものがここに表示される?</p>
+    
+    <p>
+      <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+    <p id = "title_out"></p><!--タイトル表示-->
+    <p id = "name_out"></p><!--おなまえ-->
+    <p id = "comment_out"></p><!--本文表示-->
+    <img id="file-show" height="400"><!--画像表示-->
+    </div>
+    
+    <div><button id="back">前の投稿</button></div>
+    <div><button id="next">次の投稿</button></div>
+    <div><button id="delete">現在の投稿を削除</button></div>
 
-    <div>タイトル</div>
+    <div>ハンドルネーム</div><!--タイトル入力フォーム-->
+    <div><input id="name" type="text" /></div>
+    <div>タイトル</div><!--タイトル入力フォーム-->
     <div><input id="title" type="text" /></div>
-    <div>画像</div>
+    <div>お名前</div><!--おなまえ入力フォーム-->
+    <div><input id = "name" type="text" value = "名無しさん"></div>
+    <div>画像</div><!--画像フォーム-->
     <form action="coordination.html" method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file" required accept="image/*">
       <img id="file-preview" width="400">
 
-    <div>コメント</div>
+    <div>コメント</div><!--本文入力フォーム-->
     <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
     <div><button id="tweet">投稿</button></div>
 
-    <p id = "title"></p>
-    <p id = "comment"></p>
-    <img id="file-show" width="400"><div>
-    
-      <div><button id="back">前の投稿</button></div>
-    <div><button id="next">次の投稿</button></div>
-    <div><button id="delete">現在の投稿を削除</button></div>
-      
 
 
       <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
@@ -50,8 +57,39 @@
       <h1 id="welcomeMessage"></h1>
 
       <script type="module">
-        window.onload = async (event) => {
 
+        async function reload(id){
+          const response = await fetch("/code_info2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+          });
+          let result = await response.text();
+          let data = result.split('@');
+          let name = data[0];
+          let title = data[1];
+          let comment = data[2];
+          let photo_data = data[3];
+
+          //タイトルを表示
+          let para = document.querySelector("#title_out");
+          para.innerText = `${title}`;
+
+          //コメントを表示
+          let para2 = document.querySelector("#comment_out");
+          para2.innerText = `${comment}`;
+
+          // 写真を表示
+          var img = document.getElementById('file-show');
+          img.src = photo_data;
+        }
+
+        window.onload = async (event) => {
+          const response = await fetch("/reset_obj");
+          const response_id = await fetch("/code_info");
+          let max_id = await response_id.text();
+          max_id = Number(max_id); // 1~idまでが時系列
+          reload(max_id);
         };
 
         document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
@@ -65,30 +103,7 @@
           location.href = 'coordinationupload.html';
         }
 
-        window.onload = async (event) => {
-
-        };
-
-
-        function reload(title, comment, photo_data){
-          //タイトル
-          let para = document.getElementById("title");
-          para.innerText = `${title}`;
-          //コメント
-          let para2 = document.getElementById("comment");
-          para.innerText = `${comment}`;
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-        }
-
-        document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
-          location.href = 'map.html';//マップのページに移動
-        }
-        document.querySelector("#tweet").onclick = async (event) => {//投稿ボタンが押されたときの挙動
-          location.href = 'coordinationupload.html';
-        }
-
+    
 
         let photo_data = "";
         // 画像の読み込み,文字コードに変換
@@ -111,12 +126,13 @@
         let id = 0;
         // 投稿ボタン
         document.querySelector("#tweet").onclick = async (event) => {
+          let name = document.querySelector("#name").value;
           let title = document.querySelector("#title").value;
           let comment = document.querySelector("#comment").value;
           const response = await fetch("/code_info", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, comment, photo_data })
+            body: JSON.stringify({ title, comment, photo_data, name })
           });
           let result = await response.text();
         };
@@ -132,32 +148,7 @@
             id++;
           }
 
-          // idの投稿情報を取得
-          const response = await fetch("/code_info2", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
-          });
-          let result = await response.text();
-          let data = result.split('@');
-          let title = data[0];
-          let comment = data[1];
-          let photo_data = data[2];
-
-          //タイトルを表示
-          let para = document.querySelector("#title");
-          para.innerText = `${title}`;
-
-          //コメントを表示
-          let para2 = document.querySelector("#comment");
-          para2.innerText = `${comment}`;
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
-          reload(title, comment, photo_data);
-
+          reload(id);
         };
 
         document.querySelector("#back").onclick = async (event) => {
@@ -170,30 +161,7 @@
             id--;
           }
 
-          // idの投稿情報を取得
-          const response = await fetch("/code_info2", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
-          });
-          let result = await response.text();
-          let data = result.split('@');
-          let title = data[0];
-          let comment = data[1];
-          let photo_data = data[2];
-
-            //タイトルを表示
-          let para = document.querySelector("#title");
-
-            //コメントを表示
-          let para2 = document.querySelector("#comment");
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
-          reload(title, comment, photo_data);
-
+          reload(id);
         };
 
         document.querySelector("#delete").onclick = async (event) => {
@@ -206,31 +174,7 @@
           let next_id = await response.text();
           id = Number(next_id);
 
-          // idの投稿情報を取得
-          const response2 = await fetch("/code_info2", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
-          });
-          let result = await response2.text();
-          let data = result.split('@');
-          let title = data[0];
-          let comment = data[1];
-          let photo_data = data[2];
-
-
-           //タイトルを表示
-          let para = document.querySelector("#title");
-
-          //コメントを表示
-          let para2 = document.querySelector("#comment");
-
-          // 写真を表示
-          var img = document.getElementById('file-show');
-          img.src = photo_data;
-
-          reload(title, comment, photo_data);
-
+          reload(id);
         };
 
       </script>
@@ -243,6 +187,19 @@
         h2 {
           color: plum
         }
+        p#title_out{
+          color:green;
+          font-size: 30px;
+          text-align:left;
+          margin-top: 0;
+        }
+        p#comment_out{
+          text-align:left;
+        }
+        img#file-show{
+          text-align:left;
+        }
+        
       </style>
 
 

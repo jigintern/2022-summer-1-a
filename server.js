@@ -12,6 +12,12 @@ let url = 'https://akeajtagrjjhododqhpi.supabase.co';
 let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWFqdGFncmpqaG9kb2RxaHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA2NTA2MjIsImV4cCI6MTk3NjIyNjYyMn0.QyhEX0CaRWChJpqsfvogNWmGGYB-yNJt7XcKbE825yQ';
 const supabase = createClient(url, anon_key);
 let obj; // Jsonobj, select(),insert()で使用
+let main_obj = await supabase.from('items').select();
+let lat;
+let lon;
+
+let post_key = 0;
+let post_flg = 1;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -41,8 +47,8 @@ serve(async (req) => {
   // 暑さ指数予測取得
   if (req.method === "POST" && pathname === "/loc") { // POSTメソッド，cieパス
     const requestJson = await req.json();
-    const lat = requestJson.lat; // 緯度
-    const lon = requestJson.lon; // 経度
+    lat = requestJson.lat; // 緯度
+    lon = requestJson.lon; // 経度
     // 最近座標の観測所idを特定
     const keys = Object.keys(id_lat_lon_jsonData);
     let tmp_dis = 1000.0;
@@ -69,7 +75,6 @@ serve(async (req) => {
     let people_val;
 
     async function callApi_wbgt(url_wbgt) {
-      // CSV各行読み込み
       const data = CSV.toJSON(await CSV.fetch(url_wbgt))[0];
       let keys = Object.keys(data);
       let time = data[""].substr(0, 10).replace(/\//g, "");
@@ -105,10 +110,17 @@ serve(async (req) => {
     return new Response(String(wbgt_val) + ',' + String(people_val));
   }
 
+  //　コーディネート初期化
+  if (req.method === "POST" && pathname === "/reset_obj") {
+    console.log("reset");
+    main_obj = null;
+  }
+
   // コーディネートの投稿
   if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
     obj = await supabase.from('items').insert(requestJson); // itemsへデータ挿入
+    post_flg++;
     if (obj.error == null) {
       return new Response("finished");
     } else {
@@ -116,16 +128,26 @@ serve(async (req) => {
     }
   }
 
+  // データベース更新確認
+  async function base_select() {
+    if (post_key != post_flg) {
+      post_key = post_flg;
+      main_obj = await supabase.from('items').select();
+    }
+    return main_obj;
+  };
+
   // コーディネートの呼び出し（タイトル，コメント，画像データを返す）
   if (req.method === "POST" && pathname === "/code_info2") {
     const requestJson = await req.json();
     let id = Number(requestJson.id);
-    obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let title = obj.data[id].title;
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
-      return new Response(title + '@' + comment + '@' + photo_data);
+      let name = obj.data[id].name;
+      return new Response(name + '@' + title + '@' + comment + '@' + photo_data);
     } else {
       return new Response(obj.error.message);
     }
@@ -133,7 +155,7 @@ serve(async (req) => {
 
   // 現在の投稿数を確認
   if (req.method === "GET" && pathname === "/code_info") {
-    let obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let max_id = obj.data.length-1;
       return new Response(max_id);
@@ -148,12 +170,56 @@ serve(async (req) => {
     if (obj.error == null) {
       let id = obj.data[id_del].id;
       obj = await supabase.from('items').delete().match({ id });
+      post_flg++;
       return new Response(id_del-1);
     }
   };
 
 
+  // mapのために店舗情報を返す（緯度と経度を最初に受け取る）
+  if (req.method === "POST" && pathname === "/search_shop") {
+    const requestJson = await req.json();
+    lat = requestJson.lat; // 緯度
+    lon = requestJson.lon; // 経度
+    //lat = 35;
+    //lon = 135;
+    let dist = 1; //km
 
+    let shop_info;
+    async function callApi_overpass(url_overpass) {
+      await fetch(url_overpass)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(jsonData){
+          // JSONデータを扱った処理など
+          shop_info = jsonData;
+        });
+    };
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
+    await callApi_overpass(url_overpass);
+
+    let elements = shop_info.elements;
+    let shop_lat = "", shop_lon = "", shop_name = "";
+    let sp_key = "@@@";
+    for (let i in elements) {
+      if (String(elements[i].lat) != "undefined" && String(elements[i].lon) != "undefined" && String(elements[i].tags.name) != "undefined") {
+        if (i == elements.length - 1) { sp_key = "" }
+        shop_lat += String(elements[i].lat) + sp_key;
+        shop_lon += String(elements[i].lon) + sp_key;
+        if (String(elements[i].tags.branch) != 'undefined') {
+          shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
+        } else {
+          shop_name += elements[i].tags.name + sp_key;
+        }
+      }
+    }
+
+    // return_text : 属性\n区切り，項目@@@区切り
+    let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
+    console.log(return_text);
+    return new Response(return_text);
+  };
 
 
   return serveDir(req, {
