@@ -23,19 +23,19 @@
       <p>
     <p>投稿されたものがここに表示される?</p>
 
-    <div>タイトル</div>
+    <div>タイトル</div><!--タイトル入力フォーム-->
     <div><input id="title" type="text" /></div>
     <div>画像</div>
     <form action="coordination.html" method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file" required accept="image/*">
       <img id="file-preview" width="400">
 
-    <div>コメント</div>
+    <div>コメント</div><!--本文入力フォーム-->
     <div><input id="comment" type="text" style="width: 250px; height: 100px;" /></div>
     <div><button id="tweet">投稿</button></div>
 
-    <p id = "title"></p>
-    <p id = "comment"></p>
+    <p id = "title_out"></p>
+    <p id = "comment_out"></p>
     <img id="file-show" width="400"><div>
     
       <div><button id="back">前の投稿</button></div>
@@ -72,10 +72,10 @@
 
         function reload(title, comment, photo_data){
           //タイトル
-          let para = document.getElementById("title");
+          let para = document.getElementById("title_out");
           para.innerText = `${title}`;
           //コメント
-          let para2 = document.getElementById("comment");
+          let para2 = document.getElementById("comment_out");
           para.innerText = `${comment}`;
           // 写真を表示
           var img = document.getElementById('file-show');
@@ -145,11 +145,11 @@
           let photo_data = data[2];
 
           //タイトルを表示
-          let para = document.querySelector("#title");
+          let para = document.querySelector("#title_out");
           para.innerText = `${title}`;
 
           //コメントを表示
-          let para2 = document.querySelector("#comment");
+          let para2 = document.querySelector("#comment_out");
           para2.innerText = `${comment}`;
 
           // 写真を表示
@@ -183,10 +183,10 @@
           let photo_data = data[2];
 
             //タイトルを表示
-          let para = document.querySelector("#title");
+          let para = document.querySelector("#title_out");
 
             //コメントを表示
-          let para2 = document.querySelector("#comment");
+          let para2 = document.querySelector("#comment_out");
 
           // 写真を表示
           var img = document.getElementById('file-show');
@@ -220,10 +220,10 @@
 
 
            //タイトルを表示
-          let para = document.querySelector("#title");
+          let para = document.querySelector("#title_out");
 
           //コメントを表示
-          let para2 = document.querySelector("#comment");
+          let para2 = document.querySelector("#comment_out");
 
           // 写真を表示
           var img = document.getElementById('file-show');
