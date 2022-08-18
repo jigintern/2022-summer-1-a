@@ -113,7 +113,7 @@ serve(async (req) => {
   //　コーディネート初期化
   if (req.method === "POST" && pathname === "/reset_obj") {
     console.log("reset");
-    main_obj = null;
+    main_obj = await supabase.from('items').select();
   }
 
   // コーディネートの投稿
