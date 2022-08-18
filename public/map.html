@@ -55,10 +55,12 @@
         attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
       }).addTo(mymap);
 
-      L.marker([35.710063, 139.8107])
+      let mark = L.marker([35.710063, 139.8107])
         .addTo(mymap)
         .bindPopup("スカイツリーはここ！")
         .openPopup();
+
+      //mymap.removeLayer(mark);
 
 
 
