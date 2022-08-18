@@ -43,29 +43,43 @@
     <button class="click" id="map">クールマップ</button>
     <!--涼が取れる施設を表示するマップに移動-->
 
-    <div id="mapid"></div>
-
+<<<<<<< Updated upstream
+=======
+  <table><tr>
+    <td><div id="mapid"></div></td>
+    <td>
     <table><tr>
       <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
       <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
       <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
     </tr></table>
+>>>>>>> Stashed changes
     <table><tr>
-      <td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
-      <td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
-      <td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
-    </tr></table>
-    <table><tr>
-      <td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
-      <td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
-      <td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
-    </tr></table>
-      <table><tr>
-      <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
-      <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
-    </tr></table>
+      <td><div id="mapid"></div></td>
 
-    <div id="mapid"></div>
+      <td><table><tr>
+        <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
+      </tr></table>
+        <table><tr>
+        <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
+      </tr></table></td>
+    </tr></table>
+    </td>
+  </tr></table>
+
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script type="text/javascript">
