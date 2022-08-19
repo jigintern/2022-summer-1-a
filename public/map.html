@@ -85,6 +85,7 @@
   </div>
 
 
+<script src="http://autoproject.sakura.ne.jp/imc_show/js/jquery.js"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="jquery.searchabledropdown-1.0.8.min.js"></script>
@@ -317,9 +318,19 @@
         first_button();
 
         let json;
-        await $.getJSON('type@points.json', (data) => {
-          json = data;
+        //await $.getJSON('type@points.json', (data) => {
+        //  json = data;
+        //});
+
+        await $.ajax({
+          type: 'GET',
+          url: 'type@points.json',
+          dataType: 'json',
+          success: function(data){
+            json = data;
+          }
         });
+
         function gene_code(type){
           let keys = Object.keys(json[type]);
           for(let i in keys){
