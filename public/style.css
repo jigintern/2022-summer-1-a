@@ -6,6 +6,10 @@ h1 {
   text-align: center;
 }
 
+header {
+  height: 110px;
+}
+
 div {
   text-align: center;
 }
@@ -17,8 +21,6 @@ div {
   font-size: 10px;
   border-radius: 10px;
   border: none;
-  position: absolute;
-  top: 27px;
 }
 
 .click2 {
@@ -32,7 +34,7 @@ div {
 #home {
   background-color: orange;
   position: absolute;
-  right: 240px;
+  right: 260px;
 }
 
 #home:hover {
@@ -43,7 +45,7 @@ div {
 #wear {
   background-color: plum;
   position: absolute;
-  right: 130px;
+  right: 140px;
 }
 
 #wear:hover {
@@ -115,12 +117,20 @@ div {
   filter: brightness(90%);
 }
 
-table {
-  margin:auto;
+td.first {
+  text-align: center;
+  vertical-align: middle;
 }
+
+td.second {
+  text-align: center;
+  vertical-align: top;
+}
+
+
+
 
 nobr#name_out{
   color:blue;
   font-size: 150%;
 }
-

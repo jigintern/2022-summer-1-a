@@ -8,7 +8,15 @@
 </head>
 
 <body>
-  <h1>☀えんてんかいひ☀</h1>
+
+  <header>  <h1>☀えんてんかいひ☀</h1>
+    <button class="click" id="home">ホーム</button>
+    <button class="click" id="wear">コーディネート</button>
+    <!--服装共有用SNS(?)に移動-->
+    <button class="click" id="map">クールマップ</button>
+    <!--涼が取れる施設を表示するマップに移動-->
+  </header>
+
   <div>
     <h2 style="display:inline;">コーディネート</h2>
     <input id="mitei" type="text" />
@@ -16,11 +24,6 @@
   <div>
   <div>
     <div>
-      <button class="click" id="home">ホーム</button>
-      <button class="click" id="wear">コーディネート</button>
-      <!--服装共有用SNS(?)に移動-->
-      <button class="click" id="map">クールマップ</button>
-      <!--涼が取れる施設を表示するマップに移動-->
     
     <p>
       <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
@@ -67,7 +70,9 @@
           let sec = tmp3[2].split('+')[0];
           var time = new Date(year,month,day,hour,min,sec);
           time.setHours(time.getHours() + 9);
-          return time.toLocaleString().slice(0,-3);
+          // return time.toLocaleString().slice(0,-3);
+          let jp_time = String(time.getFullYear()) + '/' + String(time.getMonth()) + '/' + String(time.getDate()) + ' ' + String(time.getHours()) + ':' + String(time.getMinutes());
+          return jp_time;
         }
 
         async function reload(id){
