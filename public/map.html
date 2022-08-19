@@ -402,7 +402,12 @@
           key = 4;
           // jQueryによる検索ボックス設定
           $(document).ready(function() {
-            $("#search_points").searchable();
+            $("#search_points").searchable({
+              exactMatch: false,
+              wildcards: true,
+              ignoreCase: true,
+              warnNoMatch: 'ヒットする項目がありません ...',
+            });
           });
         }
       }
