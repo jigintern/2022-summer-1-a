@@ -64,7 +64,9 @@
           let sec = tmp3[2].split('+')[0];
           var time = new Date(year,month,day,hour,min,sec);
           time.setHours(time.getHours() + 9);
-          return time.toLocaleString().slice(0,-3);
+          // return time.toLocaleString().slice(0,-3);
+          let jp_time = String(time.getFullYear()) + '/' + String(time.getMonth()) + '/' + String(time.getDate()) + ' ' + String(time.getHours()) + ':' + String(time.getMinutes());
+          return jp_time;
         }
 
         async function reload(id){
