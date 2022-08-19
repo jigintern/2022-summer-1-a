@@ -6,6 +6,10 @@ h1 {
   text-align: center;
 }
 
+header {
+  height: 110px;
+}
+
 div {
   text-align: center;
 }
@@ -29,6 +33,8 @@ div {
 
 #home {
   background-color: orange;
+  position: absolute;
+  right: 260px;
 }
 
 #home:hover {
@@ -38,6 +44,8 @@ div {
 
 #wear {
   background-color: plum;
+  position: absolute;
+  right: 140px;
 }
 
 #wear:hover {
@@ -47,6 +55,8 @@ div {
 
 #map{
   background-color: blue;
+  position: absolute;
+  right: 20px;
 }
 
 #map:hover{
@@ -115,4 +125,3 @@ nobr#name_out{
   color:blue;
   font-size: 150%;
 }
-
