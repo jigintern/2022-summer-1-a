@@ -140,3 +140,9 @@ nobr#name_out{
   color:blue;
   font-size: 150%;
 }
+
+.selector{
+  display: flex;
+	justify-content: center;
+	align-items: center;
+}

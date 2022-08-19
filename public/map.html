@@ -396,9 +396,9 @@
           while( ele.firstChild ){
             ele.removeChild( ele.firstChild );
           }
-          ele.innerHTML = '<p>キーワード入力で属性を絞り込めます</p>'+
-            '<select id="search_points">'+code+'</select>'+
-            '<button title="検索" type="button" onclick="set_point_other()">検索</button>';
+          ele.innerHTML = '<br><p>キーワード入力で属性を絞り込めます</p>'+
+            '<div class="selector"><select id="search_points">'+code+'</select></div>'+
+            '<br><button title="検索" type="button" onclick="set_point_other()">検索</button>';
           key = 4;
           // jQueryによる検索ボックス設定
           $(document).ready(function() {
