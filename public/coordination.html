@@ -25,8 +25,10 @@
     <p>
       <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
     <p id = "title_out"></p><!--タイトル表示-->
+    <div class id = "nametime">
     <nobr id = "name_out"></nobr><!--おなまえ-->
-    <p id = "time_out"></p><!--時刻-->    
+    <nobr id = "time_out"></nobr><!--時刻-->     
+    </div>
     <p id = "comment_out"></p><!--本文表示-->
     <img id="file-show" height="400"><!--画像表示-->
     </div>
@@ -213,12 +215,11 @@
         p#comment_out{
           text-align:left;
         }
-        nobr#name_out{
-          color:blue;
+        div.nametime{
           text-align:left;
         }
-        p#time_out{
-          text-align:left;
+        nobr#title_out{
+          color:blue;
         }
         img#file-show{
           text-align:left;
