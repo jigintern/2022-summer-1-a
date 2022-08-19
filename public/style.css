@@ -17,8 +17,6 @@ div {
   font-size: 10px;
   border-radius: 10px;
   border: none;
-  position: absolute;
-  top: 27px;
 }
 
 .click2 {
@@ -31,8 +29,6 @@ div {
 
 #home {
   background-color: orange;
-  position: absolute;
-  right: 240px;
 }
 
 #home:hover {
@@ -42,8 +38,6 @@ div {
 
 #wear {
   background-color: plum;
-  position: absolute;
-  right: 130px;
 }
 
 #wear:hover {
@@ -53,8 +47,6 @@ div {
 
 #map{
   background-color: blue;
-  position: absolute;
-  right: 20px;
 }
 
 #map:hover{
