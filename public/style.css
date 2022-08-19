@@ -35,15 +35,23 @@ table {
   border: none;
 }
 
+.click3 {
+  color: white;
+  width: 70px;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+}
+
+.click:hover, .click2:hover, .click3:hover {
+  filter: brightness(90%);
+}
+
 #home {
   background-color: orange;
   position: absolute;
   right: 260px;
-}
-
-#home:hover {
-  background-color: orange;
-  filter: brightness(90%);
 }
 
 #wear {
@@ -52,20 +60,10 @@ table {
   right: 140px;
 }
 
-#wear:hover {
-  background-color: plum;
-  filter: brightness(90%);
-}
-
 #map{
   background-color: blue;
   position: absolute;
   right: 20px;
-}
-
-#map:hover{
-  background-color: blue;
-  filter: brightness(90%);
 }
 
 #wbgt {
@@ -86,17 +84,9 @@ table {
   background-color: deepskyblue;
 }
 
-#back:hover {
-  filter: brightness(90%);
-}
-
 #next {
   width: 200px;
   background-color: deepskyblue;
-}
-
-#next:hover {
-  filter: brightness(90%);
 }
 
 #delete {
@@ -114,11 +104,26 @@ table {
   font-size: 20px;
   padding: 10px;
   border: none;
-
 }
 
 #tweet:hover {
   filter: brightness(90%);
+}
+
+#one {
+  background-color: lightblue;
+}
+
+#two {
+  background-color: lightgreen;
+}
+
+#three {
+  background-color: lightpink;
+}
+
+#four {
+  background-color: lightgrey;
 }
 
 td.first {
@@ -130,9 +135,6 @@ td.second {
   text-align: center;
   vertical-align: top;
 }
-
-
-
 
 nobr#name_out{
   color:blue;
