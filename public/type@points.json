@@ -1,7 +1,6 @@
 {
     "amenity": {
-        "bar": "\u30d0\u30fc",
-        "biergarten": "\u30d3\u30a2\u30ac\u30fc\u30c7\u30f3",
+        "car_rental": "\u30ec\u30f3\u30bf\u30ab\u30fc",
         "cafe": "\u30ab\u30d5\u30a7",
         "fast_food": "\u30d5\u30a1\u30b9\u30c8\u30d5\u30fc\u30c9\u5e97",
         "food_court": "\u30d5\u30fc\u30c9\u30b3\u30fc\u30c8",
@@ -9,6 +8,8 @@
         "pub": "\u30d1\u30d6",
         "restaurant": "\u30ec\u30b9\u30c8\u30e9\u30f3",
         "college": "\u30ad\u30e3\u30f3\u30d1\u30b9",
+        "bar": "\u30d0\u30fc",
+        "biergarten": "\u30d3\u30a2\u30ac\u30fc\u30c7\u30f3",
         "driving_school": "\u81ea\u52d5\u8eca\u5b66\u6821",
         "kindergarten": "\u4fdd\u80b2\u5712",
         "language_school": "\u5916\u56fd\u8a9e\u5b66\u6821",
@@ -23,7 +24,6 @@
         "boat_rental": "\u30ec\u30f3\u30bf\u30eb\u30dc\u30fc\u30c8",
         "boat_sharing": "\u5171\u6709\u30dc\u30fc\u30c8",
         "bus_station": "\u30d0\u30b9\u505c",
-        "car_rental": "\u30ec\u30f3\u30bf\u30ab\u30fc",
         "car_sharing": "\u30ab\u30fc\u30b7\u30a7\u30a2\u30ea\u30f3\u30b0",
         "car_wash": "\u6d17\u8eca\u5834",
         "vehicle_inspection": "\u8eca\u691c",
