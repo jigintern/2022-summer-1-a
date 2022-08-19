@@ -131,8 +131,11 @@ td.second {
   vertical-align: top;
 }
 
-
-
+.selector{
+  display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 nobr#name_out{
   color:blue;
