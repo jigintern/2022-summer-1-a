@@ -14,6 +14,10 @@ div {
   text-align: center;
 }
 
+table {
+  margin: auto;
+}
+
 .click {
   color: white;
   width: 100px;
