@@ -2,9 +2,10 @@
 <html>
 
 <head>
-  <title>コーディネート</title>
+  <title>コーディネート / ☀えんてんかいひ☀</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
@@ -28,12 +29,12 @@
     <p id = "title_out"></p><!--タイトル表示-->
     <div class = "nametime">
     <nobr id = "name_out"></nobr><!--おなまえ-->
-    <nobr id = "time_out"></nobr><!--時刻-->     
+    <nobr id = "time_out"></nobr><!--時刻-->
     </div>
     <p id = "comment_out"></p><!--本文表示-->
     <img id="file-show" height="400"><!--画像表示-->
     </div>
-    
+
     <button class="click2" id="back">←前の投稿</button><button class="click2" id="next">次の投稿→</button>
     <div><button id="delete">現在の投稿を削除</button></div>
 
@@ -46,14 +47,14 @@
     <div>画像</div><!--画像フォーム-->
     <form action="coordination.html" method="post" enctype="multipart/form-data">
       <input id="file-sample" type="file" required accept="image/*"><br>
-      <img id="file-preview" width="400">
+      <img id="file-preview">
 
     <div>コメント</div><!--本文入力フォーム-->
     <div><textarea id="comment" type="text" style="width: 250px; height: 100px;" ></textarea></div>
     <div><button id="tweet">投稿</button></div>
     <div>連投の原因になるので投稿ボタンは連打しないでください。</div>
 
-      <h1 id="welcomeMessage"></h1>
+    <h1 id="welcomeMessage"></h1>
 
       <script type="module">
         function str_date_conv_jp(st_time){
@@ -142,6 +143,7 @@
                 photo_data = this.result; // base64文字列
                 // img要素に表示
                 var img = document.getElementById('file-preview');
+                img.height="400";
                 img.src = photo_data;
             }
             // ファイルをData URIとして読み込む

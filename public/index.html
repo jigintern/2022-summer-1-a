@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>ホーム / ☀えんてんかいひ☀</title>
 </head>
 
 <body>
@@ -38,8 +40,11 @@
     </p>
 
     <p>出典：環境省電子提供サービス，総務省消防庁熱中症情報</p>
-    <p><font-size="7">#うちですごそう</font-size></p>
-    <nobr><a href="https://ichigojam.net/" target="_blank"><img src="\map_icon\IchigoJam.png" alt="おうえんバナーです。"border:0></a></nobr>
+
+    <footer>
+      <p><font color="blue"> #うちですごそう</font></p>
+      <nobr><a href="https://ichigojam.net/" target="_blank"><img src="\map_icon\IchigoJam.png" alt="おうえんバナーです。" border:0></a></nobr>
+    </footer>
 
     <script type="module">
       window.onload = async (event) => {
@@ -86,7 +91,7 @@
             document.getElementById("wbgt_val").style.textAlign = "center" ;
             document.getElementById("wbgt_val").style.border = "none" ;
             document.getElementById("wbgt_message").style.color = "red" ;
-            message.innerText = "非常に危険なので外出や運動は避けましょう!"
+            message.innerText = "非常に危険なので外出や屋外での運動は避けましょう!"
           }else if(Number(wbgt) >= 28){
             document.getElementById("wbgt_val").style.fontSize = "40px" ;
             document.getElementById("wbgt_val").style.color = "black" ;
