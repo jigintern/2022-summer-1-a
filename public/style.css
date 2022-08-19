@@ -117,9 +117,18 @@ div {
   filter: brightness(90%);
 }
 
-table {
-  margin:auto;
+td.first {
+  text-align: center;
+  vertical-align: middle;
 }
+
+td.second {
+  text-align: center;
+  vertical-align: top;
+}
+
+
+
 
 nobr#name_out{
   color:blue;
