@@ -25,7 +25,8 @@
     <p>
       <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
     <p id = "title_out"></p><!--タイトル表示-->
-    <p id = "name_out"></p><!--おなまえ-->
+    <nobr id = "name_out"></nobr><!--おなまえ-->
+    <p id = "time_out"></p><!--時刻-->    
     <p id = "comment_out"></p><!--本文表示-->
     <img id="file-show" height="400"><!--画像表示-->
     </div>
@@ -94,6 +95,10 @@
           //コメントを表示
           let para2 = document.querySelector("#comment_out");
           para2.innerText = `${comment}`;
+          
+          //時刻を表示
+          let para3 = document.querySelector("#time_out");
+          para3.innerText = `${time}`;
 
           // 写真を表示
           var img = document.getElementById('file-show');
@@ -141,6 +146,7 @@
         let id = 0;
         // 投稿ボタン
         document.querySelector("#tweet").onclick = async (event) => {
+          location.href = "coordinationupload.html";
           let name = document.querySelector("#name").value;
           let title = document.querySelector("#title").value;
           let comment = document.querySelector("#comment").value;
@@ -207,7 +213,7 @@
         p#comment_out{
           text-align:left;
         }
-        p#name_out{
+        nobr#name_out{
           color:blue;
           text-align:left;
         }
