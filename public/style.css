@@ -118,3 +118,9 @@ div {
 table {
   margin:auto;
 }
+
+nobr#name_out{
+  color:blue;
+  font-size: 150%;
+}
+
