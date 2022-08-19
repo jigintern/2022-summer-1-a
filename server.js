@@ -146,7 +146,8 @@ serve(async (req) => {
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
       let name = obj.data[id].name;
-      return new Response(name + '@' + title + '@' + comment + '@' + photo_data);
+      let time = obj.data[id].created_at;
+      return new Response(name + '@' + title + '@' + comment + '@' + photo_data + '@' + time);
     } else {
       return new Response(obj.error.message);
     }
@@ -184,9 +185,6 @@ serve(async (req) => {
     let type = type_name.split('@')[0];
     let place = type_name.split('@')[1];
     let dist = requestJson.dist;
-    //lat = 35;
-    //lon = 135;
-    //let dist = 1; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
