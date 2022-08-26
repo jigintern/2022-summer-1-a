@@ -2,4 +2,4 @@
 
 main ブランチに PUSH されたら自動で Deno Deploy にデプロイされます。
 
-https://hako-debate-subjects-api.deno.dev/
+https://jigintern-2022-summer-1-a.deno.dev/
